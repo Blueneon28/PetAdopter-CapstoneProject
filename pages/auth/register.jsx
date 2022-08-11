@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import logo from "../../assets/img/logo-petdopter.png";
-import { CustomInput } from "../../components/CustomInput";
+import { CustomInput, CustomInputComboBox } from "../../components/CustomInput";
 import { SignupButton, GoogleButton } from "../../components/CustomButton";
 
 export default function Register() {
@@ -23,10 +23,12 @@ export default function Register() {
               placeholder="Full name"
               //   onChange={(e) => setFullName(e.target.value)}
             />
-            <CustomInput
+            <CustomInputComboBox
               id="inputCity"
-              type="text"
-              placeholder="City"
+              title="City"
+              op1="Jakarta"
+              op2="Malang"
+              op3="Semarang"
               //   onChange={(e) => setCity(e.target.value)}
             />
             <CustomInput
