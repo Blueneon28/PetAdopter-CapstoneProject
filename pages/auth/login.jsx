@@ -9,25 +9,25 @@ import { CustomInput } from "../../components/CustomInput";
 import { LoginButton, GoogleButton } from "../../components/CustomButton";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (email && password) {
+    if (username && password) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [email, password]);
+  }, [username, password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const body = {
-      email,
+      username,
       password,
     };
     var requestOptions = {
@@ -35,10 +35,7 @@ export default function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-    fetch(
-      "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/login",
-      requestOptions
-    )
+    fetch("https://golangprojectku.site/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { code, message, data } = result;
@@ -74,10 +71,10 @@ export default function Login() {
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="grid grid-cols-1 justify-items-center gap-5">
               <CustomInput
-                id="inputEmail"
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                id="inputUsername"
+                type="text"
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
               />
               <CustomInput
                 id="inputPassword"

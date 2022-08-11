@@ -9,42 +9,42 @@ import { SignupButton, GoogleButton } from "../../components/CustomButton";
 
 export default function Register() {
   const router = useRouter();
-  const [fullName, setFullName] = useState("");
+  const [fullname, setFullName] = useState("");
   const [city, setCity] = useState("");
-  const [fullAddress, setFullAddress] = useState("");
+  const [address, setFullAddress] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     if (
-      fullName &&
+      fullname &&
       city &&
-      fullAddress &&
+      address &&
       username &&
       email &&
-      phoneNumber &&
+      phonenumber &&
       password
     ) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [fullName, city, fullAddress, username, email, phoneNumber, password]);
+  }, [fullname, city, address, username, email, phonenumber, password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const body = {
-      fullName,
+      fullname,
       city,
-      fullAddress,
+      address,
       username,
       email,
-      phoneNumber,
+      phonenumber,
       password,
     };
     var requestOptions = {
@@ -52,17 +52,12 @@ export default function Register() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-    fetch(
-      "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/users",
-      requestOptions
-    )
+    fetch("https://golangprojectku.site/users", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { message, data } = result;
         if (result.code === 200) {
-          if (data) {
-            router.push("/auth/login");
-          }
+          router.push("/auth/login");
         }
         alert(message);
       })
