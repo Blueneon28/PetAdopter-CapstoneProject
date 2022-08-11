@@ -52,13 +52,16 @@ export default function Register() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     };
-    fetch("https://rubahmerah.site/users", requestOptions)
+    fetch(
+      "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/users",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         const { message, data } = result;
         if (result.code === 200) {
           if (data) {
-            router.push("/login");
+            router.push("/auth/login");
           }
         }
         alert(message);
