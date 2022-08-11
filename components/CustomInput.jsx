@@ -11,10 +11,11 @@ function CustomInput({ id, type, placeholder, value, onChange }) {
   );
 }
 
-function CustomInputComboBox({ id, title, op1, op2, op3 }) {
+function CustomInputComboBox({ id, title, op1, op2, op3, onChange }) {
   return (
     <select
       id={id}
+      onChange={onChange}
       defaultValue="none"
       className="w-72 p-1 rounded-lg font-light text-sm border-2 border-primary font-Poppins bg-white"
     >
