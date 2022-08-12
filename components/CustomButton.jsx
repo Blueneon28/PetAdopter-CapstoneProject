@@ -32,7 +32,9 @@ function AccentButton({ id, label, onClick, type, loading }) {
 function LoginButton({ id, label, onClick, type, loading }) {
   return (
     <button
-      className="w-72 bg-primary text-white font-Poppins text-lg py-1 rounded-lg font-bold"
+      className={`w-72 bg-primary text-white font-Poppins text-lg py-1 rounded-lg font-bold ${
+        loading && "cursor-not-allowed"
+      }`}
       id={id}
       type={type}
       onClick={onClick}
@@ -46,7 +48,9 @@ function LoginButton({ id, label, onClick, type, loading }) {
 function SignupButton({ id, label, onClick, type, loading }) {
   return (
     <button
-      className="w-72 bg-accent text-white font-Poppins py-1 rounded-lg font-bold"
+      className={`w-72 bg-accent text-white font-Poppins text-lg py-1 rounded-lg font-bold ${
+        loading && "cursor-not-allowed"
+      }`}
       id={id}
       type={type}
       onClick={onClick}
@@ -59,15 +63,13 @@ function SignupButton({ id, label, onClick, type, loading }) {
 
 function GoogleButton({ id, label, onClick, type, loading }) {
   return (
-    <button
-      className="w-72 py-1 font-Poppins font-bold border-2 border-black flex justify-center gap-2"
-      id={id}
-      type={type}
-      onClick={onClick}
-      disabled={loading}
-    >
-      <Image src={google} width={23} height={23} />
-      {label}
+    <button id={id} type={type} onClick={onClick} disabled={loading}>
+      <div className="w-72 bg-blue-500 flex text-white border-2 border-blue-500 items-center font-Poppins text-lg font-medium">
+        <div className="bg-white p-1 flex">
+          <Image src={google} width={20} height={20} />
+        </div>
+        <div className="w-full px-3 flex justify-center">{label}</div>
+      </div>
     </button>
   );
 }

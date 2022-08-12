@@ -60,46 +60,50 @@ export default function Login() {
   return (
     <>
       <div className="w-screen h-screen grid items-center text-sm font-Poppins">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center justify-items-center">
-          <div className="grid justify-items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
+          <div className="grid justify-items-center pb-2">
             <Image src={logo} alt="" width={150} height={200} />
             <p className=" font-bold italic text-primary">
               "Adopt the cutest pet near you
             </p>
             <p className=" font-bold italic text-primary">as your playmate!"</p>
           </div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="grid grid-cols-1 justify-items-center gap-5">
-              <CustomInput
-                id="inputUsername"
-                type="text"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <CustomInput
-                id="inputPassword"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div>
+          <div className="pb-2">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="grid grid-cols-1 justify-items-center gap-5">
+                <CustomInput
+                  id="inputUsername"
+                  type="text"
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <CustomInput
+                  id="inputPassword"
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
                 <LoginButton
                   id="loginButton"
                   type="submit"
                   label="Login"
                   loading={loading || disabled}
                 />
-                <div className="mt-2 flex space-x-1 justify-center ">
-                  <p className="opacity-30">Don't have an account?</p>
-                  <Link href="/auth/register">
-                    <a>Sign up here</a>
-                  </Link>
-                </div>
-                <p className="flex justify-center opacity-30 pb-1">or</p>
-                <GoogleButton label="Continue with Google" />
               </div>
+            </form>
+            <div className="flex gap-1 justify-center pt-1">
+              <p className="opacity-30">Don't have an account?</p>
+              <Link href="/auth/register">
+                <a className="text-secondary">Sign up here</a>
+              </Link>
             </div>
-          </form>
+            <p className="flex justify-center opacity-30">or</p>
+
+            <div className="pt-1">
+              <GoogleButton label="Continue with Google" />
+            </div>
+          </div>
         </div>
       </div>
     </>
