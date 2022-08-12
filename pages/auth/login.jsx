@@ -39,15 +39,10 @@ export default function Login() {
       .then((response) => response.json())
       .then((result) => {
         const { code, message, data } = result;
-        if (code === 200 && data.role === "user") {
+        if (code === 200) {
           const { token } = data;
           setCookie("token", token);
-          router.push("/");
-        }
-        if (code === 200 && data.role === "admin") {
-          const { token } = data;
-          setCookie("token", token);
-          router.push("/admin");
+          data.role === "user" ? router.push("/") : router.push("/admin");
         }
         alert(message);
       })

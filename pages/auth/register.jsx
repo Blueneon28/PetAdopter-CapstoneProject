@@ -55,7 +55,7 @@ export default function Register() {
     fetch("https://golangprojectku.site/users", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message, data } = result;
+        const { message } = result;
         if (result.code === 200) {
           router.push("/auth/login");
         }
