@@ -1,3 +1,9 @@
+import Layout from "../../components/Layout";
+
 export default function PetDetail() {
-  return <div>[id]</div>;
+  return (
+    <Layout headTitle="Pet Detail" headDesc="Welcome to petdopter!">
+      <div>Pet Detail</div>
+    </Layout>
+  );
 }
