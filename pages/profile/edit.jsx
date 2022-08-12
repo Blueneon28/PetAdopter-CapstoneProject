@@ -9,7 +9,7 @@ import {
 } from "../../components/CustomButton";
 import { CustomInput, CustomInputComboBox } from "../../components/CustomInput";
 
-export default function Edit() {
+export default function EditProfile() {
   return (
     <>
       <Layout>
