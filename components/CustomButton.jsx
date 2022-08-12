@@ -4,7 +4,7 @@ import google from "../assets/img/logo-google.png";
 function PrimaryButton({ id, label, onClick, type, loading }) {
   return (
     <button
-      className="w-72 bg-primary text-white py-1 rounded-lg font-Poppins font-bold"
+      className="w-20 bg-primary text-white py-1 rounded-lg font-Poppins font-bold"
       id={id}
       type={type}
       onClick={onClick}
@@ -18,7 +18,7 @@ function PrimaryButton({ id, label, onClick, type, loading }) {
 function AccentButton({ id, label, onClick, type, loading }) {
   return (
     <button
-      className="w-72 bg-accent py-1 rounded-lg font-Poppins font-bold"
+      className="w-20 bg-accent py-1 rounded-lg font-Poppins font-bold"
       id={id}
       type={type}
       onClick={onClick}
@@ -72,4 +72,25 @@ function GoogleButton({ id, label, onClick, type, loading }) {
   );
 }
 
-export { PrimaryButton, AccentButton, LoginButton, SignupButton, GoogleButton };
+function NoBackgroundButton({ id, label, onClick, type, loading }) {
+  return (
+    <button
+      className="w-72 text-primary font-Poppins text-lg py-1 rounded-lg font-bold border-2 border-primary"
+      id={id}
+      type={type}
+      onClick={onClick}
+      disabled={loading}
+    >
+      {label}
+    </button>
+  );
+}
+
+export {
+  PrimaryButton,
+  AccentButton,
+  LoginButton,
+  SignupButton,
+  GoogleButton,
+  NoBackgroundButton,
+};
