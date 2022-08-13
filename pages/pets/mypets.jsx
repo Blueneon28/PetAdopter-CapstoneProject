@@ -43,7 +43,6 @@ export async function getServerSideProps({ req, res }) {
 
 export default function MyPets({ data, token }) {
   const [pets, setPets] = useState(data);
-  console.log(pets);
   const [loading, setLoading] = useState(false);
 
   return (
