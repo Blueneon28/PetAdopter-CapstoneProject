@@ -69,10 +69,31 @@ export default function Register() {
 
   return (
     <>
-      <div className="w-screen h-screen grid items-center text-sm font-Poppins">
+      <div className="w-screen h-screen grid items-center text-md md:text-2xl font-Poppins">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
-          <div className="grid justify-items-center pb-2">
+          {/* <div className="grid justify-items-center pb-4">
             <Image src={logo} alt="" width={150} height={200} />
+            <p className=" font-bold italic text-primary">
+              "Adopt the cutest pet near you
+            </p>
+            <p className=" font-bold italic text-primary">as your playmate!"</p>
+          </div>
+          <div className="grid justify-items-center pb-4">
+            <Image src={logo} alt="" width={150} height={200} />
+            <p className=" font-bold italic text-primary">
+              "Adopt the cutest pet near you
+            </p>
+            <p className=" font-bold italic text-primary">as your playmate!"</p>
+          </div> */}
+          <div className="lg:hidden grid justify-items-center pb-4 ">
+            <Image src={logo} alt="" width={150} height={200} />
+            <p className=" font-bold italic text-primary">
+              "Adopt the cutest pet near you
+            </p>
+            <p className=" font-bold italic text-primary">as your playmate!"</p>
+          </div>
+          <div className="hidden lg:grid justify-items-center pb-4 ">
+            <Image src={logo} alt="" width={300} height={400} />
             <p className=" font-bold italic text-primary">
               "Adopt the cutest pet near you
             </p>
@@ -80,7 +101,7 @@ export default function Register() {
           </div>
           <div>
             <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="grid grid-cols-1 justify-items-center gap-2">
+              <div className="grid grid-cols-1 justify-items-center gap-4">
                 <CustomInput
                   id="inputFullName"
                   type="text"
@@ -134,14 +155,14 @@ export default function Register() {
                 />
               </div>
             </form>
-            <div className="flex gap-1 justify-center py-1">
+            <div className="flex gap-1 justify-center py-3">
               <p className="opacity-30">Already have an account?</p>
               <Link href="/auth/login">
                 <a className="text-secondary">Log in here</a>
               </Link>
             </div>
-            <div className="m-1 divider flex justify-center">or</div>
-            <div className="pt-1">
+            <div className="divider flex justify-center">or</div>
+            <div className="pt-2">
               <GoogleButton label="Sign up with Google" />
             </div>
           </div>

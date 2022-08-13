@@ -54,10 +54,17 @@ export default function Login() {
 
   return (
     <>
-      <div className="w-screen h-screen grid items-center text-sm font-Poppins">
+      <div className="w-screen h-screen grid items-center text-md md:text-2xl lg:text-2xl font-Poppins">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
-          <div className="grid justify-items-center pb-2">
+          <div className="lg:hidden grid justify-items-center pb-4 ">
             <Image src={logo} alt="" width={150} height={200} />
+            <p className=" font-bold italic text-primary">
+              "Adopt the cutest pet near you
+            </p>
+            <p className=" font-bold italic text-primary">as your playmate!"</p>
+          </div>
+          <div className="hidden lg:grid justify-items-center pb-4 ">
+            <Image src={logo} alt="" width={300} height={400} />
             <p className=" font-bold italic text-primary">
               "Adopt the cutest pet near you
             </p>
@@ -88,15 +95,15 @@ export default function Login() {
                 />
               </div>
             </form>
-            <div className="flex gap-1 justify-center pt-1">
+            <div className="flex gap-1 justify-center pt-3">
               <p className="opacity-30">Don't have an account?</p>
               <Link href="/auth/register">
                 <a className="text-secondary">Sign up here</a>
               </Link>
             </div>
-            <div className="divider m-1 flex justify-center">or</div>
+            <div className="divider flex justify-center">or</div>
 
-            <div className="pt-1">
+            <div>
               <GoogleButton label="Continue with Google" />
             </div>
           </div>
