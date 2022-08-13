@@ -59,11 +59,15 @@ export default function EditProfile() {
                 />
               </div>
               <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton label="Done" loading={loading || disabled} />
+                <SmallButton
+                  label="Done"
+                  loading={loading || disabled}
+                  className="bg-primary text-white font-bold"
+                />
                 <SmallButton
                   href="/profile"
                   label="cancel"
-                  className="bg-accent text-black"
+                  className="bg-accent"
                 />
               </div>
             </form>

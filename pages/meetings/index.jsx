@@ -121,11 +121,15 @@ export default function MeetingAppointment({ data }) {
                     </thead>
                   </table>
                   <div className="space-x-2">
-                    <SmallButton label="Edit" href="/meetings/edit" />
+                    <SmallButton
+                      label="Edit"
+                      href="/meetings/edit"
+                      className="bg-primary text-white font-bold"
+                    />
                     <SmallButton
                       label="Delete"
                       href="#"
-                      className="bg-red-500 text-black font-normal"
+                      className="bg-red-500"
                     />
                   </div>
                 </div>

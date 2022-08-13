@@ -76,11 +76,12 @@ export default function AddMeeting() {
                   label="Add"
                   loading={loading || disabled}
                   type="submit"
+                  className="bg-primary text-white font-bold"
                 />
                 <SmallButton
                   href="/meetings"
                   label="cancel"
-                  className="bg-accent text-black"
+                  className="bg-accent"
                 />
               </div>
             </form>

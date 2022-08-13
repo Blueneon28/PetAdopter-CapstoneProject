@@ -84,6 +84,7 @@ export default function Login() {
                   type="submit"
                   label="Login"
                   loading={loading || disabled}
+                  className="bg-primary font-bold text-white"
                 />
               </div>
             </form>

@@ -126,7 +126,7 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <LargeButton
-                  className="bg-accent"
+                  className="bg-accent text-white font-bold"
                   id="signupButton"
                   type="submit"
                   label="Sign up"

@@ -32,11 +32,15 @@ export default function EditMeeting() {
                 />
               </div>
               <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton label="Update" loading={loading || disabled} />
+                <SmallButton
+                  label="Update"
+                  loading={loading || disabled}
+                  className="text-white bg-primary font-bold"
+                />
                 <SmallButton
                   href="/meetings"
                   label="cancel"
-                  className="bg-accent text-black"
+                  className="bg-accent"
                 />
               </div>
             </form>
