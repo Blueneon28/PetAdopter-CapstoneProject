@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import { CustomInput } from "../../components/CustomInput";
 import { SmallButton } from "../../components/CustomButton";
 
-export default function AddMeeting() {
+export default function EditMeeting() {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   return (
@@ -32,9 +32,9 @@ export default function AddMeeting() {
                 />
               </div>
               <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton label="Add" loading={loading || disabled} />
+                <SmallButton label="Update" loading={loading || disabled} />
                 <SmallButton
-                  href="/meeting"
+                  href="/meetings"
                   label="cancel"
                   className="bg-accent text-black"
                 />

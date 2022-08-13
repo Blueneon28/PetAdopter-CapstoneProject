@@ -1,5 +1,4 @@
 import { getCookie, deleteCookie } from "cookies-next";
-import Link from "next/link";
 
 import Layout from "../../components/Layout";
 import { SmallButton } from "../../components/CustomButton";
@@ -122,7 +121,7 @@ export default function MeetingAppointment({ data }) {
                     </thead>
                   </table>
                   <div className="space-x-2">
-                    <SmallButton label="Edit" href="/meeting/edit" />
+                    <SmallButton label="Edit" href="/meetings/edit" />
                     <SmallButton
                       label="Delete"
                       href="#"

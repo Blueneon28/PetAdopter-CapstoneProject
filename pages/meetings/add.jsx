@@ -1,12 +1,52 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import Layout from "../../components/Layout";
 import { CustomInput } from "../../components/CustomInput";
 import { SmallButton } from "../../components/CustomButton";
 
-export default function EditMeeting() {
+export default function AddMeeting() {
+  const router = useRouter();
+  const [date, setDate] = useState("");
+  const [time, settime] = useState("");
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (date && time) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [date, time]);
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const body = {
+      date,
+      time,
+    };
+    var requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+    fetch("https://golangprojectku.site/meetings", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { message } = result;
+        if (result.code === 200) {
+          router.push("/meetings");
+        }
+        alert(message);
+      })
+      .catch((error) => {
+        alert(error.toString());
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <Layout>
       <div className="w-screen h-screen pt-10">
@@ -32,9 +72,9 @@ export default function EditMeeting() {
                 />
               </div>
               <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton label="Update" loading={loading || disabled} />
+                <SmallButton label="Add" loading={loading || disabled} />
                 <SmallButton
-                  href="/meeting"
+                  href="/meetings"
                   label="cancel"
                   className="bg-accent text-black"
                 />
