@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <header className="w-full bg-white dark:bg-black text-black dark:text-white md:sticky md:top-0 md:z-30">
       <div className="w-full bg-white dark:bg-black text-black dark:text-white fixed bottom-0 z-30 md:hidden h-16">
-        <div className="flex justify-around font-medium px-2">
+        <nav className="flex justify-around font-medium px-2">
           <Link href="/">
             <a
               className={`flex flex-col justify-center items-center ${
@@ -59,7 +59,7 @@ export default function Header() {
               More
             </a>
           </Link>
-        </div>
+        </nav>
       </div>
       <div className="hidden md:block w-full">
         <div className="flex justify-between items-center p-6 font-medium text-lg lg:text-xl">
@@ -73,7 +73,7 @@ export default function Header() {
               </div>
             </a>
           </Link>
-          <div className="flex">
+          <nav className="flex">
             <Link href="/">
               <a
                 className={`${
@@ -94,10 +94,10 @@ export default function Header() {
                 <h3>Adoption</h3>
               </a>
             </Link>
-            <Link href="/myPets">
+            <Link href="/pets/mypets">
               <a
                 className={`${
-                  route === "/myPets"
+                  route === "/pets/mypets"
                     ? `text-[#FFC700] dark:text-[#CDA000]`
                     : ""
                 }`}
@@ -105,7 +105,7 @@ export default function Header() {
                 <h3>My Pets</h3>
               </a>
             </Link>
-          </div>
+          </nav>
           <div className="flex">
             <button type="button" className="p-1 rounded-full lg:hidden">
               {theme === "light" ? (
