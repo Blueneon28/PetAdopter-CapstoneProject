@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import logo from "../../assets/img/logo-petdopter.png";
 import { CustomInput, CustomInputComboBox } from "../../components/CustomInput";
-import { SignupButton, GoogleButton } from "../../components/CustomButton";
+import { LargeButton, GoogleButton } from "../../components/CustomButton";
 
 export default function Register() {
   const router = useRouter();
@@ -125,7 +125,8 @@ export default function Register() {
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <SignupButton
+                <LargeButton
+                  className="bg-accent"
                   id="signupButton"
                   type="submit"
                   label="Sign up"

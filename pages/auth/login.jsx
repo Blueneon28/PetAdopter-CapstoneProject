@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import logo from "../../assets/img/logo-petdopter.png";
 import { CustomInput } from "../../components/CustomInput";
-import { LoginButton, GoogleButton } from "../../components/CustomButton";
+import { LargeButton, GoogleButton } from "../../components/CustomButton";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -79,7 +79,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <LoginButton
+                <LargeButton
                   id="loginButton"
                   type="submit"
                   label="Login"

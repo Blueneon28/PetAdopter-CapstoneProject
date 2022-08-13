@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Layout from "../../components/Layout";
-import { PrimaryButton, AccentButton } from "../../components/CustomButton";
+import { SmallButton } from "../../components/CustomButton";
 import { CustomInput, CustomInputComboBox } from "../../components/CustomInput";
 
 export default function EditProfile() {
@@ -59,8 +59,12 @@ export default function EditProfile() {
                 />
               </div>
               <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <PrimaryButton label="Done" loading={loading || disabled} />
-                <AccentButton href="/profile" label="cancel" />
+                <SmallButton label="Done" loading={loading || disabled} />
+                <SmallButton
+                  href="/profile"
+                  label="cancel"
+                  className="bg-accent text-black"
+                />
               </div>
             </form>
           </div>
