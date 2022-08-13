@@ -93,7 +93,7 @@ export default function Login() {
                 <a className="text-secondary">Sign up here</a>
               </Link>
             </div>
-            <p className="flex justify-center opacity-30">or</p>
+            <div className="divider m-1 flex justify-center">or</div>
 
             <div className="pt-1">
               <GoogleButton label="Continue with Google" />

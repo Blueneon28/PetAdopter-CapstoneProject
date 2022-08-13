@@ -139,8 +139,10 @@ export default function Register() {
                 <a className="text-secondary">Log in here</a>
               </Link>
             </div>
-            <p className="flex justify-center opacity-30 pb-1">or</p>
-            <GoogleButton label="Sign up with Google" />
+            <div className="m-1 divider flex justify-center">or</div>
+            <div className="pt-1">
+              <GoogleButton label="Sign up with Google" />
+            </div>
           </div>
         </div>
       </div>
