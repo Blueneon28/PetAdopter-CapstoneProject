@@ -24,8 +24,8 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full">
-      <div className="w-full fixed bottom-0 z-30 md:hidden h-16">
+    <header className="w-full bg-white dark:bg-black text-black dark:text-white md:sticky md:top-0 md:z-30">
+      <div className="w-full bg-white dark:bg-black text-black dark:text-white fixed bottom-0 z-30 md:hidden h-16">
         <div className="flex justify-around font-medium px-2">
           <Link href="/">
             <a
@@ -61,7 +61,7 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="hidden md:block w-full sticky top-0 z-30">
+      <div className="hidden md:block w-full">
         <div className="flex justify-between items-center p-6 font-medium text-lg lg:text-xl">
           <Link href="/">
             <a>
