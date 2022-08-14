@@ -37,10 +37,10 @@ export default function Header() {
               <h3>Home</h3>
             </a>
           </Link>
-          <Link href="/adoption">
+          <Link href="/adoptions">
             <a
               className={`flex flex-col justify-center items-center ${
-                route === "/adoption"
+                route === "/adoptions"
                   ? `text-[#FFC700] dark:text-[#CDA000]`
                   : ""
               }`}
@@ -83,10 +83,10 @@ export default function Header() {
                 <h3>Home</h3>
               </a>
             </Link>
-            <Link href="/adoption">
+            <Link href="/adoptions">
               <a
                 className={`mx-12 lg:mx-24 ${
-                  route === "/adoption"
+                  route === "/adoptions"
                     ? `text-[#FFC700] dark:text-[#CDA000]`
                     : ""
                 }`}
