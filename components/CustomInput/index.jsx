@@ -1,7 +1,7 @@
 function CustomInput({ id, type, placeholder, value, onChange }) {
   return (
     <input
-      className="input input-bordered input-primary input-sm w-72 p-1 rounded-lg font-light text-xs border-2 border-primary font-Poppins dark:bg-black"
+      className="input input-bordered input-primary input-sm md:input-md lg:input-md w-72 md:w-full lg:w-full p-1 rounded-lg font-light text-sm md:text-2xl lg:text-2xl border-2 border-primary font-Poppins dark:bg-black"
       id={id}
       type={type}
       placeholder={placeholder}
@@ -17,7 +17,7 @@ function CustomInputComboBox({ id, title, op1, op2, op3, onChange }) {
       id={id}
       onChange={onChange}
       defaultValue="none"
-      className="select select-primary select-sm w-72 p-1 rounded-lg font-light text-xs border-2 border-primary font-Poppins bg-white dark:bg-black"
+      className="select select-primary select-sm md:select-md lg:select-md w-72 md:w-full lg:w-full p-1 rounded-lg font-light text-sm md:text-2xl lg:text-2xl border-2 border-primary font-Poppins bg-white dark:bg-black"
     >
       <option value="none" disabled>
         {title}
