@@ -11,14 +11,17 @@ export default function EditProfile() {
     <Layout>
       <div className="w-screen h-screen pt-10">
         <div className="grid grid-cols-1 gap-5 justify-items-center">
-          <div className="font-bold text-2xl">
+          <div className="font-bold text-xl md:text-2xl pr-48 md:pr-96 border-b-2 border-black">
             <h1>Edit Profile</h1>
-            <hr className="border-black w-72 dark:border-white" />
           </div>
           <div className="grid grid-cols-1 gap-5">
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="grid grid-cols-1 justify-items-center gap-2">
-                <CustomInput id="inputFile" type="file" />
+                <input
+                  className="input input-bordered input-primary input-sm md:input-md lg:input-md w-72 md:w-full lg:w-full p-1 rounded-lg font-light text-xs md:text-xl lg:text-xl border-2 border-primary font-Poppins dark:bg-black"
+                  id="inputFile"
+                  type="file"
+                />
                 <CustomInput
                   id="inputFullName"
                   type="text"

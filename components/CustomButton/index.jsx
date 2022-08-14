@@ -6,7 +6,7 @@ function SmallButton({ id, label, onClick, loading, href, className }) {
   return (
     <Link href={`${href}`}>
       <button
-        className={`${className} w-20 py-1 rounded-lg font-Poppins ${
+        className={`${className} text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins ${
           loading && "cursor-not-allowed"
         }`}
         id={id}

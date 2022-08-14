@@ -51,9 +51,8 @@ export default function AddMeeting() {
     <Layout>
       <div className="w-screen h-screen pt-10">
         <div className="grid grid-cols-1 gap-5 justify-items-center">
-          <div className="font-bold text-2xl">
+          <div className="font-bold text-xl md:text-2xl pr-24 md:pr-72 border-b-2 border-black">
             <h1>Meeting Invitation</h1>
-            <hr className="border-black w-72 dark:border-white" />
           </div>
           <div className="grid grid-cols-1 gap-5">
             <form onSubmit={(e) => handleSubmit(e)}>
