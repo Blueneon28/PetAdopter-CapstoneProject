@@ -71,20 +71,6 @@ export default function Register() {
     <>
       <div className="w-screen h-screen grid items-center text-md md:text-2xl font-Poppins">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
-          {/* <div className="grid justify-items-center pb-4">
-            <Image src={logo} alt="" width={150} height={200} />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
-            </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
-          </div>
-          <div className="grid justify-items-center pb-4">
-            <Image src={logo} alt="" width={150} height={200} />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
-            </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
-          </div> */}
           <div className="lg:hidden grid justify-items-center pb-4 ">
             <Image src={logo} alt="" width={150} height={200} />
             <p className=" font-bold italic text-primary">
