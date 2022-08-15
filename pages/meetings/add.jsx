@@ -46,26 +46,25 @@ export default function AddMeeting() {
       })
       .finally(() => setLoading(false));
   };
-
   return (
     <Layout>
-      <div className="w-screen h-screen pt-10">
+      <div className="pt-10">
         <div className="grid grid-cols-1 gap-5 justify-items-center">
-          <div className="font-bold text-xl md:text-2xl pr-24 md:pr-72 border-b-2 border-black">
+          <div className="font-bold text-xl md:text-2xl pr-24 md:pr-40 border-b-2 border-black dark:border-white">
             <h1>Meeting Invitation</h1>
           </div>
-          <div className="grid grid-cols-1 gap-5">
+          <div className="grid grid-cols-1 gap-5 md:w-96">
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="grid grid-cols-1 justify-items-center gap-2">
                 <CustomInput
                   id="inputDate"
-                  type="text"
+                  type="date"
                   placeholder="Date"
                   onChange={(e) => setDate(e.target.value)}
                 />
                 <CustomInput
                   id="inputTime"
-                  type="text"
+                  type="time"
                   placeholder="Time"
                   onChange={(e) => setTime(e.target.value)}
                 />
@@ -78,7 +77,7 @@ export default function AddMeeting() {
                   className="bg-primary text-white font-bold"
                 />
                 <SmallButton
-                  href="/meetings"
+                  href="/adoptions"
                   label="cancel"
                   className="bg-accent"
                 />

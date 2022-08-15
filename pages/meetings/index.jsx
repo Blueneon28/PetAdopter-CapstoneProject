@@ -1,7 +1,11 @@
 import { getCookie, deleteCookie } from "cookies-next";
+import { useState } from "react";
 
 import Layout from "../../components/Layout";
-import { SmallButton } from "../../components/CustomButton";
+import {
+  MyAppointmentCard,
+  MyInvitationCard,
+} from "../../components/MeetingCard";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -29,7 +33,7 @@ export async function getServerSideProps({ req, res }) {
       props: { code: data.code, data: data.data, message: data.message, token },
     };
   } else {
-    // deleteCookie("token");
+    deleteCookie("token");
     return {
       props: {
         data: {
@@ -37,42 +41,67 @@ export async function getServerSideProps({ req, res }) {
           appointment: "no appointment",
         },
       },
-      // redirect: {
-      //   permanent: false,
-      //   destination: "/",
-      // },
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
     };
   }
 }
 
 export default function MeetingAppointment({ data }) {
-  if (!data.invitation === "no invitation") {
+  const [datas, setDatas] = useState(data);
+  // const [datas, setData] = useState([
+  //   {
+  //     meetingid: 1,
+  //     time: "09:00:00",
+  //     date: "21-12-00",
+  //     petname: "Tom",
+  //     petphoto: "Tom.jpg",
+  //     seekername: "Jacob",
+  //     ownername: "John",
+  //     ownerphoto: "john.jpg",
+  //     owneraddress: "Jakarta",
+  //   },
+  //   {
+  //     meetingid: 2,
+  //     time: "09:00:00",
+  //     date: "21-12-00",
+  //     petname: "Bob",
+  //     petphoto: "Bob.jpg",
+  //     seekername: "Jacob",
+  //     ownername: "John",
+  //     ownerphoto: "john.jpg",
+  //     owneraddress: "Jakarta",
+  //   },
+  // ]);
+  if (datas.invitation === "no invitation") {
     return (
       <Layout>
-        <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center">
+        <div className="pt-10 grid grid-cols-1 lg:grid-cols-2 justify-items-center lg:items-start">
           <div className="collapse">
             <input type="checkbox" />
-            <div className="collapse-title text-sm font-medium">
+            <div className="collapse-title text-sm md:text-lg font-medium">
               Click to show/hide My Appointment
             </div>
             <div className="collapse-content">
               <div>
                 <div className="font-bold text-2xl">My Appointment</div>
                 <hr className="border-black dark:border-white w-72 py-2" />
-                <div className="opacity-50">{data.appointment}</div>
+                <div className="opacity-50">{datas.appointment}</div>
               </div>
             </div>
           </div>
           <div className="collapse">
             <input type="checkbox" />
-            <div className="collapse-title text-sm font-medium">
+            <div className="collapse-title text-sm md:text-lg font-medium">
               Click to show/hide My Invitation
             </div>
             <div className="collapse-content">
               <div>
                 <div className="font-bold text-2xl">My Invitation</div>
                 <hr className="border-black dark:border-white w-72 py-2" />
-                <div className="opacity-50">{data.invitation}</div>
+                <div className="opacity-50">{datas.invitation}</div>
               </div>
             </div>
           </div>
@@ -82,10 +111,10 @@ export default function MeetingAppointment({ data }) {
   } else {
     return (
       <Layout>
-        <div className="grid grid-cols-1 lg:grid-cols-2 justify-items-center">
+        <div className="pt-10 grid grid-cols-1 lg:grid-cols-2 justify-items-center lg:items-start">
           <div className="collapse">
             <input type="checkbox" />
-            <div className="collapse-title text-sm font-medium">
+            <div className="collapse-title text-sm md:text-lg font-medium">
               Click to show/hide My Appointment
             </div>
             <div className="collapse-content">
@@ -93,52 +122,24 @@ export default function MeetingAppointment({ data }) {
                 <div className="font-bold text-2xl">My Appointment</div>
                 <hr className="border-black dark:border-white w-72 py-2" />
               </div>
-              <div className="grid grid-cols-1 gap-5 ">
-                {/* <Image src={`/${ownerphoto}`} width={100} height={100} /> */}
-                <div className="w-72 text-sm border-l-8 border-primary pl-3">
-                  <table>
-                    <thead>
-                      <tr>
-                        <td>Date</td>
-                        <td className="text-primary">{data.date}</td>
-                      </tr>
-                      <tr>
-                        <td>Time</td>
-                        <td className="text-primary">{data.time}</td>
-                      </tr>
-                      <tr>
-                        <td>Place</td>
-                        <td className="text-primary">{data.owneraddress}</td>
-                      </tr>
-                      <tr>
-                        <td>Pet name</td>
-                        <td className="text-primary">{data.petname}</td>
-                      </tr>
-                      <tr>
-                        <td>Owner name</td>
-                        <td className="text-primary">{data.ownername}</td>
-                      </tr>
-                    </thead>
-                  </table>
-                  <div className="space-x-2">
-                    <SmallButton
-                      label="Edit"
-                      href="/meetings/edit"
-                      className="bg-primary text-white font-bold"
-                    />
-                    <SmallButton
-                      label="Delete"
-                      href="#"
-                      className="bg-red-500"
-                    />
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 gap-5">
+                {datas.map((data) => (
+                  <MyAppointmentCard
+                    key={data.meetingid}
+                    id={data.meetingid}
+                    date={data.date}
+                    time={data.time}
+                    place={data.owneraddress}
+                    petname={data.petname}
+                    seekername={data.seekername}
+                  />
+                ))}
               </div>
             </div>
           </div>
           <div className="collapse">
             <input type="checkbox" />
-            <div className="collapse-title text-sm font-medium">
+            <div className="collapse-title text-sm md:text-lg font-medium">
               Click to show/hide My Invitation
             </div>
             <div className="collapse-content">
@@ -146,34 +147,18 @@ export default function MeetingAppointment({ data }) {
                 <div className="font-bold text-2xl">My Invitation</div>
                 <hr className="border-black dark:border-white w-72 py-2" />
               </div>
-              <div className="grid grid-cols-1 gap-5 ">
-                {/* <Image src={`/${ownerphoto}`} width={100} height={100} /> */}
-                <div className="w-72 text-sm border-l-8 border-primary pl-3">
-                  <table>
-                    <thead>
-                      <tr>
-                        <td>Date</td>
-                        <td className="text-primary">{data.date}</td>
-                      </tr>
-                      <tr>
-                        <td>Time</td>
-                        <td className="text-primary">{data.time}</td>
-                      </tr>
-                      <tr>
-                        <td>Place</td>
-                        <td className="text-primary">{data.owneraddress}</td>
-                      </tr>
-                      <tr>
-                        <td>Pet name</td>
-                        <td className="text-primary">{data.petname}</td>
-                      </tr>
-                      <tr>
-                        <td>Owner name</td>
-                        <td className="text-primary">{data.ownername}</td>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
+              <div className="grid flex-cols-1 gap-5">
+                {datas.map((data) => (
+                  <MyInvitationCard
+                    key={data.meetingid}
+                    id={data.meetingid}
+                    date={data.date}
+                    time={data.time}
+                    place={data.owneraddress}
+                    petname={data.petname}
+                    ownername={data.ownername}
+                  />
+                ))}
               </div>
             </div>
           </div>
