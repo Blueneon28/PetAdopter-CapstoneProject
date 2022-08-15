@@ -41,17 +41,9 @@ export async function getServerSideProps({ req, res }) {
   }
 }
 
-export default function Profile(data) {
+export default function Profile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
-  // const [dataUser, setDataUser] = useState({
-  //   photoprofile: "/photo.png",
-  //   username: "Jacob",
-  //   fullname: "Jacob Capung",
-  //   email: "Jacob@alterra.id",
-  //   address: "jln.cijantung",
-  //   city: "Jakarata",
-  //   phonenumber: "081234567891",
-  // });
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = async (e) => {
     setLoading(true);
@@ -94,7 +86,7 @@ export default function Profile(data) {
                   <Image
                     className="rounded-full"
                     src={dataUser.photoprofile}
-                    alt="/photo.png"
+                    alt={dataUser.photoprofile}
                     width={150}
                     height={150}
                   />
@@ -105,7 +97,7 @@ export default function Profile(data) {
                   <Image
                     className="rounded-full"
                     src={dataUser.photoprofile}
-                    alt="/photo.png"
+                    alt={dataUser.photoprofile}
                     width={300}
                     height={300}
                   />
@@ -120,12 +112,16 @@ export default function Profile(data) {
                   Edit Profile
                 </button>
               </Link>
-              <button className="w-72 font-Poppins text-lg md:text-2xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500">
+              <button
+                onClick={(e) => handleDelete(e)}
+                type="submit"
+                className="w-72 font-Poppins text-lg md:text-2xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500"
+              >
                 Delete Account
               </button>
               <div className="border-b-2 lg:hidden border-black dark:border-white w-72 pt-4 md:px-60"></div>
             </div>
-            <div className="w-72 md:w-full border-l-8 border-primary pl-3 text-md md:text-2xl lg:text-2xl">
+            <div className="grid w-72 md:w-full border-l-8 border-primary pl-3 text-md md:text-2xl lg:text-2xl lg:items-center">
               <table className="">
                 <thead className="">
                   <tr>

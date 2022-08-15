@@ -44,6 +44,7 @@ export default function Register() {
       username,
       email,
       phonenumber,
+      photoprofile: "/photo.png",
       password,
     };
     var requestOptions = {
