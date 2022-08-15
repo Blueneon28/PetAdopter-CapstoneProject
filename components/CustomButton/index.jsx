@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import google from "../../assets/img/logo-google.png";
 
 function SmallButton({ id, label, onClick, loading, href, className }) {
   return (
@@ -44,10 +43,10 @@ function GoogleButton({ id, label, onClick, loading }) {
     >
       <div className=" bg-blue-500 flex text-white border-2 border-blue-500 items-center font-Poppins text-lg md:text-2xl lg:text-2xl font-medium">
         <div className="bg-white p-1 flex md:hidden lg:hidden">
-          <Image src={google} width={20} height={20} />
+          <Image src="/logo-google.png" alt="logo" width={20} height={20} />
         </div>
         <div className="bg-white p-1 hidden md:flex lg:flex">
-          <Image src={google} width={40} height={40} />
+          <Image src="/logo-google.png" alt="logo" width={40} height={40} />
         </div>
         <div className="w-full px-3 flex justify-center">{label}</div>
       </div>

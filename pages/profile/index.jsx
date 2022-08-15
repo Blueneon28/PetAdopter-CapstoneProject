@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
 import { getCookie, deleteCookie } from "cookies-next";
 
@@ -40,7 +41,18 @@ export async function getServerSideProps({ req, res }) {
   }
 }
 
-export default function Profile({ data }) {
+export default function Profile(data) {
+  const [dataUser, setDataUser] = useState(data);
+  // const [dataUser, setDataUser] = useState({
+  //   photoprofile: "/photo.png",
+  //   username: "Jacob",
+  //   fullname: "Jacob Capung",
+  //   email: "Jacob@alterra.id",
+  //   address: "jln.cijantung",
+  //   city: "Jakarata",
+  //   phonenumber: "081234567891",
+  // });
+
   const handleDelete = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -68,54 +80,77 @@ export default function Profile({ data }) {
   };
   return (
     <Layout>
-      <div className="pt-10 grid items-start font-Poppins">
-        <div className="grid grid-cols-1 gap-5 justify-items-center">
-          <div className="font-bold text-2xl md:text-2xl px-20 md:px-44 border-b-2 border-black">
+      <div className="pt-10 font-Poppins">
+        <div className="grid grid-cols-1 justify-items-center">
+          <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-48 md:pr-80 lg:pr-96 md:space-x-40 lg:space-x-96">
             <h1>My Profile</h1>
+            <p></p>
           </div>
+          <div className="border-t-2 border-black dark:border-white w-72 pb-4 md:px-60 lg:px-96"></div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-items-center">
             <div className="grid justify-items-center">
-              {/* <Image src={`/${photoprofile}`} width={100} height={100} /> */}
-              <img src="//" height={150} width={150} />
+              <div className="avatar flex md:hidden lg:hidden">
+                <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                  <Image
+                    className="rounded-full"
+                    src={dataUser.photoprofile}
+                    alt="/photo.png"
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              </div>
+              <div className="avatar hidden md:flex lg:flex">
+                <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                  <Image
+                    className="rounded-full"
+                    src={dataUser.photoprofile}
+                    alt="/photo.png"
+                    width={300}
+                    height={300}
+                  />
+                </div>
+              </div>
+              <div className="py-2"></div>
               <Link href="/profile/edit">
                 <button
-                  className="w-72 text-primary font-Poppins text-lg md:text-xl py-1 mb-4 rounded-lg font-bold border-2 border-primary"
+                  className="w-72 text-primary font-Poppins text-lg md:text-2xl py-1 md:py-2 mb-4 rounded-lg font-bold border-2 border-primary"
                   type="submit"
                 >
                   Edit Profile
                 </button>
               </Link>
-              <button className="w-72 font-Poppins text-lg md:text-xl py-1 mb-4 rounded-lg font-medium bg-red-500">
+              <button className="w-72 font-Poppins text-lg md:text-2xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500">
                 Delete Account
               </button>
-              <div className="border-b-2 lg:hidden border-black w-full pt-4 md:px-60"></div>
+              <div className="border-b-2 lg:hidden border-black dark:border-white w-72 pt-4 md:px-60"></div>
             </div>
-            <div className="w-72 md:w-full border-l-8 border-primary pl-3">
-              <table className="table-compact">
-                <thead className="text-xl md:text-2xl lg:text-4xl">
+            <div className="w-72 md:w-full border-l-8 border-primary pl-3 text-md md:text-2xl lg:text-2xl">
+              <table className="">
+                <thead className="">
                   <tr>
                     <td>Full name</td>
-                    <td className="text-primary">{data.fullname}</td>
+                    <td className="text-primary">{dataUser.fullname}</td>
                   </tr>
                   <tr>
                     <td>City</td>
-                    <td className="text-primary">{data.city}</td>
+                    <td className="text-primary">{dataUser.city}</td>
                   </tr>
                   <tr>
                     <td>Address</td>
-                    <td className="text-primary">{data.address}</td>
+                    <td className="text-primary">{dataUser.address}</td>
                   </tr>
                   <tr>
                     <td>Username</td>
-                    <td className="text-primary">{data.username}</td>
+                    <td className="text-primary">{dataUser.username}</td>
                   </tr>
                   <tr>
                     <td>Email</td>
-                    <td className="text-primary">{data.email}</td>
+                    <td className="text-primary">{dataUser.email}</td>
                   </tr>
                   <tr>
                     <td>Phone number</td>
-                    <td className="text-primary">{data.phonenumber}</td>
+                    <td className="text-primary">{dataUser.phonenumber}</td>
                   </tr>
                 </thead>
               </table>

@@ -4,7 +4,6 @@ import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import logo from "../../assets/img/logo-petdopter.png";
 import { CustomInput } from "../../components/CustomInput";
 import { LargeButton, GoogleButton } from "../../components/CustomButton";
 
@@ -57,14 +56,24 @@ export default function Login() {
       <div className="w-screen h-screen grid items-center text-md md:text-2xl lg:text-2xl font-Poppins">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
           <div className="lg:hidden grid justify-items-center pb-4 ">
-            <Image src={logo} alt="" width={150} height={200} />
+            <Image
+              src="/logo-petdopter.png"
+              alt="logo"
+              width={200}
+              height={200}
+            />
             <p className=" font-bold italic text-primary">
               "Adopt the cutest pet near you
             </p>
             <p className=" font-bold italic text-primary">as your playmate!"</p>
           </div>
           <div className="hidden lg:grid justify-items-center pb-4 ">
-            <Image src={logo} alt="" width={300} height={400} />
+            <Image
+              src="/logo-petdopter.png"
+              alt="logo"
+              width={400}
+              height={400}
+            />
             <p className=" font-bold italic text-primary">
               "Adopt the cutest pet near you
             </p>
