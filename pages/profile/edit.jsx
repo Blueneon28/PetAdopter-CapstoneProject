@@ -89,11 +89,11 @@ export default function EditProfile({ data, token }) {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="pt-10">
           <div className="grid grid-cols-1 justify-items-center">
-            <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-80 lg:pr-96 md:space-x-40 lg:space-x-96">
+            {/* <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-80  md:space-x-40 lg:pr-96 lg:space-x-96"> */}
+            <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-96 lg:w-4/5">
               <h1>Edit Profile</h1>
-              <p></p>
             </div>
-            <div className="border-t-2 border-black dark:border-white w-72 pb-4 md:px-60 lg:px-96"></div>
+            <div className="border-t-2 border-black dark:border-white w-72 md:w-96 pb-4 md:px-64 lg:w-4/5"></div>
             <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
               <div className="grid justify-items-center">
                 <div className="avatar flex md:hidden lg:hidden">
@@ -132,7 +132,7 @@ export default function EditProfile({ data, token }) {
                   }}
                 />
               </div>
-              <div className="mt-4 grid grid-cols-1 justify-items-center gap-y-2 md:gap-4">
+              <div className="mt-4 grid grid-cols-1 justify-items-center gap-y-2 md:gap-y-4">
                 <CustomInput
                   id="inputFullName"
                   type="text"
@@ -185,21 +185,21 @@ export default function EditProfile({ data, token }) {
                   onChange={(e) => handleChange(e.target.value, "password")}
                 />
               </div>
-              <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton
-                  onClick={(e) => handleSubmit(e)}
-                  label="Done"
-                  loading={loading}
-                  className="bg-primary text-white font-bold"
-                />
-                <SmallButton
-                  href="/profile"
-                  label="cancel"
-                  className="bg-accent"
-                />
-              </div>
             </div>
           </div>
+        </div>
+        <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
+          <SmallButton
+            onClick={(e) => handleSubmit(e)}
+            label="Done"
+            loading={loading}
+            className="bg-primary text-white font-semibold"
+          />
+          <SmallButton
+            href="/profile"
+            label="cancel"
+            className="text-black bg-accent"
+          />
         </div>
       </form>
     </Layout>

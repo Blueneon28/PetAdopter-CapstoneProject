@@ -1,11 +1,48 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { getCookie, deleteCookie } from "cookies-next";
 
 import Layout from "../../components/Layout";
 import { CustomInput } from "../../components/CustomInput";
 import { SmallButton } from "../../components/CustomButton";
 
-export default function AddMeeting() {
+export async function getServerSideProps({ req, res }) {
+  const token = getCookie("token", { req, res });
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth/login",
+      },
+    };
+  }
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await fetch(
+    "https://golangprojectku.site/adoptions",
+    requestOptions
+  );
+  const data = await response.json();
+  if (response.status === 200) {
+    return {
+      props: { code: data.code, data: data.data, message: data.message, token },
+    };
+  } else {
+    deleteCookie("token");
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth/login",
+      },
+    };
+  }
+}
+
+export default function AddMeeting({ token }) {
   const router = useRouter();
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -29,7 +66,9 @@ export default function AddMeeting() {
     };
     var requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(body),
     };
     fetch("https://golangprojectku.site/meetings", requestOptions)
@@ -74,12 +113,12 @@ export default function AddMeeting() {
                   label="Add"
                   loading={loading || disabled}
                   type="submit"
-                  className="bg-primary text-white font-bold"
+                  className="bg-primary text-white font-semibold"
                 />
                 <SmallButton
                   href="/adoptions"
                   label="cancel"
-                  className="bg-accent"
+                  className="text-black bg-accent"
                 />
               </div>
             </form>

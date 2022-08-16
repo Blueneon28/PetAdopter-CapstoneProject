@@ -1,4 +1,4 @@
-import { SmallButton } from "../CustomButton";
+import Link from "next/link";
 
 function MyAppointmentCard(data) {
   return (
@@ -7,34 +7,39 @@ function MyAppointmentCard(data) {
         <table>
           <thead>
             <tr>
-              <td>Date</td>
+              <td className="font-medium">Date</td>
               <td className="text-primary">{data.date}</td>
             </tr>
             <tr>
-              <td>Time</td>
+              <td className="font-medium">Time</td>
               <td className="text-primary">{data.time}</td>
             </tr>
             <tr>
-              <td>Place</td>
+              <td className="font-medium">Place</td>
               <td className="text-primary">{data.place}</td>
             </tr>
             <tr>
-              <td>Pet name</td>
+              <td className="font-medium">Pet name</td>
               <td className="text-primary">{data.petname}</td>
             </tr>
             <tr>
-              <td>Seeker name</td>
+              <td className="font-medium">Seeker name</td>
               <td className="text-primary">{data.seekername}</td>
             </tr>
           </thead>
         </table>
-        <div className="space-x-2">
-          <SmallButton
-            label="Edit"
-            href="/meetings/edit"
-            className="bg-primary text-white font-bold"
-          />
-          <SmallButton label="Delete" href="#" className="bg-red-500" />
+        <div className="space-x-1 dark:text-black">
+          <Link href="/meetings/edit">
+            <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
+              Edit
+            </button>
+          </Link>
+          <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
+            Done
+          </button>
+          <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500">
+            Delete
+          </button>
         </div>
       </div>
     </div>
@@ -48,23 +53,23 @@ function MyInvitationCard(data) {
         <table>
           <thead>
             <tr>
-              <td>Date</td>
+              <td className="font-medium">Date</td>
               <td className="text-primary">{data.date}</td>
             </tr>
             <tr>
-              <td>Time</td>
+              <td className="font-medium">Time</td>
               <td className="text-primary">{data.time}</td>
             </tr>
             <tr>
-              <td>Place</td>
+              <td className="font-medium">Place</td>
               <td className="text-primary">{data.place}</td>
             </tr>
             <tr>
-              <td>Pet name</td>
+              <td className="font-medium">Pet name</td>
               <td className="text-primary">{data.petname}</td>
             </tr>
             <tr>
-              <td>Owner name</td>
+              <td className="font-medium">Owner name</td>
               <td className="text-primary">{data.ownername}</td>
             </tr>
           </thead>
