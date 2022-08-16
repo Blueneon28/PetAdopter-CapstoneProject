@@ -114,6 +114,7 @@ export default function Profile({ data, token }) {
               </Link>
               <button
                 onClick={(e) => handleDelete(e)}
+                disabled={loading}
                 type="submit"
                 className="w-72 text-black font-Poppins text-md md:text-xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500"
               >
