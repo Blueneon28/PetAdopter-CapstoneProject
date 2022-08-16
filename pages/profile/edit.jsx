@@ -89,7 +89,6 @@ export default function EditProfile({ data, token }) {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="pt-10">
           <div className="grid grid-cols-1 justify-items-center">
-            {/* <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-80  md:space-x-40 lg:pr-96 lg:space-x-96"> */}
             <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-96 lg:w-4/5">
               <h1>Edit Profile</h1>
             </div>
