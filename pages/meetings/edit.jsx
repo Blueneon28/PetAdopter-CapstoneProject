@@ -1,11 +1,50 @@
 import { useState } from "react";
+import { getCookie, deleteCookie } from "cookies-next";
 
 import Layout from "../../components/Layout";
 import { CustomInput } from "../../components/CustomInput";
 import { SmallButton } from "../../components/CustomButton";
 
-export default function EditMeeting() {
-  const [dataMeeting, setDataMeeting] = useState({});
+export async function getServerSideProps({ req, res }) {
+  const token = getCookie("token", { req, res });
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth/login",
+      },
+    };
+  }
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await fetch(
+    // "https://golangprojectku.site/meetings",
+    " https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings",
+
+    requestOptions
+  );
+  const data = await response.json();
+  if (response.status === 200) {
+    return {
+      props: { code: data.code, data: data.data, message: data.message, token },
+    };
+  } else {
+    deleteCookie("token");
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth/login",
+      },
+    };
+  }
+}
+
+export default function EditMeeting({ data, token }) {
+  const [dataMeeting, setDataMeeting] = useState(data);
   const [loading, setLoading] = useState(false);
   const [objSubmit, setObjSubmit] = useState({});
 
@@ -69,12 +108,12 @@ export default function EditMeeting() {
                 <SmallButton
                   label="Update"
                   loading={loading}
-                  className="text-white bg-primary font-bold"
+                  className="text-white bg-primary font-semibold"
                 />
                 <SmallButton
                   href="/meetings"
                   label="cancel"
-                  className="bg-accent"
+                  className="text-black bg-accent"
                 />
               </div>
             </form>
