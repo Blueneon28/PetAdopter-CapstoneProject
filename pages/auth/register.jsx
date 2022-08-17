@@ -159,7 +159,10 @@ export default function Register() {
             </div>
             <div className="divider flex justify-center">or</div>
             <div className="pt-2">
-              <GoogleButton label="Sign up with Google" />
+              <GoogleButton
+                label="Sign up with Google"
+                href="https://golangprojectku.site/oauth/signup"
+              />
             </div>
           </div>
         </div>

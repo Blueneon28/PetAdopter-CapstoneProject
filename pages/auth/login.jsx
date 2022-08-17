@@ -113,7 +113,10 @@ export default function Login() {
             <div className="divider flex justify-center">or</div>
 
             <div>
-              <GoogleButton label="Continue with Google" />
+              <GoogleButton
+                label="Continue with Google"
+                href="https://golangprojectku.site/oauth/login"
+              />
             </div>
           </div>
         </div>

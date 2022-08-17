@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getCookie, deleteCookie } from "cookies-next";
 
 import Layout from "../../components/Layout";
+import TitlePage from "../../components/TitlePage";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -71,70 +72,68 @@ export default function Profile({ data, token }) {
       .finally(() => setLoading(false));
   };
   return (
-    <Layout>
-      <div className="pt-10 font-Poppins">
-        <div className="grid grid-cols-1 justify-items-center">
-          <div className="font-bold text-lg md:text-2xl lg:text-2xl pr-48 md:pr-80 lg:pr-96 md:space-x-40 lg:space-x-96">
-            <h1>My Profile</h1>
-            <p></p>
-          </div>
-          <div className="lg:mb-4 border-t-2 border-black dark:border-white w-72 pb-4 md:px-60 lg:px-96"></div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-items-center">
-            <div className="grid justify-items-center">
-              <div className="avatar flex md:hidden lg:hidden">
-                <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
-                  <Image
-                    className="rounded-full"
-                    src={dataUser.photoprofile}
-                    alt={dataUser.photoprofile}
-                    width={150}
-                    height={150}
-                  />
+    <Layout headTitle={`${data.fullname}`} headDesc="Detail Profile">
+      <div className="p-4 md:px-12 lg:px-24">
+        <TitlePage page="My Profile" />
+        <div className="py-4 md:py-6 font-Poppins">
+          <div className="grid grid-cols-1 justify-items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-items-center">
+              <div className="grid justify-items-center">
+                <div className="avatar flex md:hidden lg:hidden">
+                  <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                    <Image
+                      className="rounded-full"
+                      src={dataUser.photoprofile}
+                      alt={dataUser.photoprofile}
+                      width={150}
+                      height={150}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="avatar hidden md:flex lg:flex">
-                <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
-                  <Image
-                    className="rounded-full"
-                    src={dataUser.photoprofile}
-                    alt={dataUser.photoprofile}
-                    width={300}
-                    height={300}
-                  />
+                <div className="avatar hidden md:flex lg:flex">
+                  <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                    <Image
+                      className="rounded-full"
+                      src={dataUser.photoprofile}
+                      alt={dataUser.photoprofile}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="py-2"></div>
-              <Link href="/profile/edit">
+                <div className="py-2"></div>
+                <Link href="/profile/edit">
+                  <button
+                    className="w-72 text-primary font-Poppins text-md md:text-xl py-1 md:py-2 mb-4 rounded-lg font-bold border-2 border-primary"
+                    type="submit"
+                  >
+                    Edit Profile
+                  </button>
+                </Link>
                 <button
-                  className="w-72 text-primary font-Poppins text-md md:text-xl py-1 md:py-2 mb-4 rounded-lg font-bold border-2 border-primary"
+                  onClick={(e) => handleDelete(e)}
+                  disabled={loading}
                   type="submit"
+                  className="w-72 text-black font-Poppins text-md md:text-xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500"
                 >
-                  Edit Profile
+                  Delete Account
                 </button>
-              </Link>
-              <button
-                onClick={(e) => handleDelete(e)}
-                disabled={loading}
-                type="submit"
-                className="w-72 text-black font-Poppins text-md md:text-xl py-1 md:py-2 mb-4 rounded-lg font-medium bg-red-500"
-              >
-                Delete Account
-              </button>
-              <div className="border-b-2 lg:hidden border-black dark:border-white w-72 pt-0 md:px-60"></div>
-            </div>
-            <div className="grid justify-items-center text-md md:text-xl lg:border-l-8 lg:border-primary lg:pl-10">
-              <p className="font-semibold">Full name</p>
-              <p>{dataUser.fullname}</p>
-              <p className="font-semibold mt-2">City</p>
-              <p>{dataUser.city}</p>
-              <p className="font-semibold mt-2">Address</p>
-              <p>{dataUser.address}</p>
-              <p className="font-semibold mt-2">Username</p>
-              <p>{dataUser.username}</p>
-              <p className="font-semibold mt-2">Email</p>
-              <p>{dataUser.email}</p>
-              <p className="font-semibold mt-2">Phone number</p>
-              <p>{dataUser.phonenumber}</p>
+                <div className="border-b-2 lg:hidden border-black dark:border-white w-72 pt-0 md:px-60"></div>
+              </div>
+              <div className="grid justify-items-center text-md md:text-xl lg:border-l-8 lg:border-primary lg:pl-10">
+                <p className="font-semibold">Full name</p>
+                <p>{dataUser.fullname}</p>
+                <p className="font-semibold mt-2">City</p>
+                <p>{dataUser.city}</p>
+                <p className="font-semibold mt-2">Address</p>
+                <p>{dataUser.address}</p>
+                <p className="font-semibold mt-2">Username</p>
+                <p>{dataUser.username}</p>
+                <p className="font-semibold mt-2">Email</p>
+                <p>{dataUser.email}</p>
+                <p className="font-semibold mt-2">Phone number</p>
+                <p>{dataUser.phonenumber}</p>
+              </div>
             </div>
           </div>
         </div>
