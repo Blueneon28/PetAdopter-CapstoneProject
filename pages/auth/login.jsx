@@ -62,10 +62,12 @@ export default function Login() {
               width={200}
               height={200}
             />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
+            <p className="font-bold italic text-primary">
+              &quot;Adopt the cutest pet near you
             </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
+            <p className="font-bold italic text-primary">
+              as your playmate!&quot;
+            </p>
           </div>
           <div className="hidden lg:grid justify-items-center pb-4 ">
             <Image
@@ -74,10 +76,12 @@ export default function Login() {
               width={400}
               height={400}
             />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
+            <p className="font-bold italic text-primary">
+              &quot;Adopt the cutest pet near you
             </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
+            <p className="font-bold italic text-primary">
+              as your playmate!&quot;
+            </p>
           </div>
           <div className="pb-2">
             <form onSubmit={(e) => handleSubmit(e)}>
@@ -105,7 +109,7 @@ export default function Login() {
               </div>
             </form>
             <div className="flex gap-1 justify-center pt-3">
-              <p className="opacity-30">Don't have an account?</p>
+              <p className="opacity-30">Don&apos;t have an account?</p>
               <Link href="/auth/register">
                 <a className="text-secondary">Sign up here</a>
               </Link>

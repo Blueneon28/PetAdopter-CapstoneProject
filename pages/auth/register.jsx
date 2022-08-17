@@ -78,10 +78,12 @@ export default function Register() {
               width={200}
               height={200}
             />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
+            <p className="font-bold italic text-primary">
+              &quot;Adopt the cutest pet near you
             </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
+            <p className="font-bold italic text-primary">
+              as your playmate!&quot;
+            </p>
           </div>
           <div className="hidden lg:grid justify-items-center pb-4 ">
             <Image
@@ -90,10 +92,12 @@ export default function Register() {
               width={400}
               height={400}
             />
-            <p className=" font-bold italic text-primary">
-              "Adopt the cutest pet near you
+            <p className="font-bold italic text-primary">
+              &quot;Adopt the cutest pet near you
             </p>
-            <p className=" font-bold italic text-primary">as your playmate!"</p>
+            <p className="font-bold italic text-primary">
+              as your playmate!&quot;
+            </p>
           </div>
           <div>
             <form onSubmit={(e) => handleSubmit(e)}>
