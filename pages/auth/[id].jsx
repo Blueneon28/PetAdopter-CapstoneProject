@@ -13,7 +13,7 @@ export default function Redirect() {
       setCookie("token", token);
       role === "user" ? router.replace("/") : router.replace("/admin");
     } else {
-      router.replace("/auth/register");
+      router.replace("/auth/login");
     }
   }, []);
   return;
