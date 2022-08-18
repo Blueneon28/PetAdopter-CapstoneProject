@@ -3,10 +3,7 @@ import { useState } from "react";
 
 import Layout from "../../components/Layout";
 import TitlePage from "../../components/TitlePage";
-import {
-  MyAppointmentCard,
-  MyInvitationCard,
-} from "../../components/MeetingCard";
+import { MyInvitationCard } from "../../components/MeetingCard";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -25,9 +22,9 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    // "https://golangprojectku.site/meetings",
-    "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings",
-    requestOptions
+    "https://golangprojectku.site/mymeetings"
+    // "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/mymeetings",
+    // requestOptions
   );
   const data = await response.json();
   if (response.status === 200) {
@@ -45,9 +42,8 @@ export async function getServerSideProps({ req, res }) {
   }
 }
 
-export default function MyAppointments({ data, token }) {
-  const [dataMeetings, setDataMeetings] = useState(data);
-
+export default function MyInvitations({ data }) {
+  const [dataMeetings] = useState(data);
   return (
     <Layout
       headTitle="My Invitations"

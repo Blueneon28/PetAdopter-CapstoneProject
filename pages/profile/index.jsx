@@ -84,7 +84,7 @@ export default function Profile({ data, token }) {
                     <Image
                       className="rounded-full"
                       src={dataUser.photoprofile}
-                      alt={dataUser.photoprofile}
+                      alt={dataUser.username}
                       width={150}
                       height={150}
                     />
@@ -95,7 +95,7 @@ export default function Profile({ data, token }) {
                     <Image
                       className="rounded-full"
                       src={dataUser.photoprofile}
-                      alt={dataUser.photoprofile}
+                      alt={dataUser.username}
                       width={300}
                       height={300}
                     />

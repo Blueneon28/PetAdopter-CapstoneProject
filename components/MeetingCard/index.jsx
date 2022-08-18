@@ -1,6 +1,28 @@
 import Link from "next/link";
 
-function MyAppointmentCard(data) {
+function MyAppointmentCard(data, id) {
+  const handleDelete = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    var requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    fetch(`https://golangprojectku.site/meetings/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { message } = result;
+        alert(message);
+      })
+      .catch((error) => {
+        alert(error, toString());
+      })
+      .finally(() => setLoading(false));
+  };
   return (
     <div className="grid grid-cols-1 gap-5 ">
       <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
@@ -29,7 +51,7 @@ function MyAppointmentCard(data) {
           </thead>
         </table>
         <div className="space-x-1 dark:text-black">
-          <Link href="/meetings/edit">
+          <Link href={`/meetings/edit/${id}`}>
             <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
               Edit
             </button>
@@ -37,7 +59,10 @@ function MyAppointmentCard(data) {
           <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
             Done
           </button>
-          <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500">
+          <button
+            onClick={(e) => handleDelete(e)}
+            className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500"
+          >
             Delete
           </button>
         </div>

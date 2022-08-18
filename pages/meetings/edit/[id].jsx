@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getCookie, deleteCookie } from "cookies-next";
 
-import Layout from "../../components/Layout";
-import TitlePage from "../../components/TitlePage";
-import { CustomInput } from "../../components/CustomInput";
-import { SmallButton } from "../../components/CustomButton";
+import Layout from "../../../components/Layout";
+import TitlePage from "../../../components/TitlePage";
+import { CustomInput } from "../../../components/CustomInput";
+import { SmallButton } from "../../../components/CustomButton";
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res, params }) {
+  const { id } = params;
+
   const token = getCookie("token", { req, res });
   if (!token) {
     return {
@@ -16,6 +18,7 @@ export async function getServerSideProps({ req, res }) {
       },
     };
   }
+
   const requestOptions = {
     method: "GET",
     headers: {
@@ -23,8 +26,8 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    // "https://golangprojectku.site/meetings",
-    " https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings",
+    `https://golangprojectku.site/meetings/${id}`,
+    // `https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings`,
 
     requestOptions
   );
@@ -45,9 +48,22 @@ export async function getServerSideProps({ req, res }) {
 }
 
 export default function EditMeeting({ data, token }) {
-  const [dataMeeting, setDataMeeting] = useState(data);
-  const [loading, setLoading] = useState(false);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState(data[0].time);
+  // const [date, setDate] = useState(data.date);
+  // const [time, setTime] = useState(data.time);
   const [objSubmit, setObjSubmit] = useState({});
+
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (date && time) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [date, time]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -64,10 +80,16 @@ export default function EditMeeting({ data, token }) {
       body: raw,
     };
 
-    fetch("https://golangprojectku.site/meetings", requestOptions)
+    fetch(
+      `https://golangprojectku.site/meetings/${data.meetingid}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         const { message } = result;
+        if (result.code === 200) {
+          router.push("/myappointments");
+        }
         alert(message);
         setObjSubmit({});
       })
@@ -93,25 +115,32 @@ export default function EditMeeting({ data, token }) {
                     id="inputDate"
                     type="date"
                     placeholder="Date"
-                    value={dataMeeting.date}
-                    onChange={(e) => handleChange(e.target.value, "date")}
+                    value={date}
+                    onChange={(e) => {
+                      setDate(e.target.value);
+                      handleChange(e.target.value, "date");
+                    }}
                   />
                   <CustomInput
                     id="inputTime"
                     type="time"
                     placeholder="Time"
-                    value={dataMeeting.time}
-                    onChange={(e) => handleChange(e.target.value, "time")}
+                    value={time}
+                    onChange={(e) => {
+                      setTime(e.target.value);
+                      handleChange(e.target.value, "time");
+                    }}
                   />
                 </div>
                 <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
                   <SmallButton
+                    onClick={(e) => handleSubmit(e)}
                     label="Update"
-                    loading={loading}
+                    loading={loading || disabled}
                     className="text-white bg-primary font-semibold"
                   />
                   <SmallButton
-                    href="/meetings"
+                    href="/meetings/myappointments"
                     label="cancel"
                     className="text-black bg-accent"
                   />
