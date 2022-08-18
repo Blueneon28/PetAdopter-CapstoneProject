@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
     domains: ["storage.googleapis.com"],
@@ -15,7 +15,7 @@ const nextConfig = {
         },
       ],
       permanent: false,
-      destination: "/profile",
+      destination: "/",
     },
     {
       source: "/auth/register",
@@ -26,7 +26,7 @@ const nextConfig = {
         },
       ],
       permanent: false,
-      destination: "/profile",
+      destination: "/",
     },
   ],
 };
