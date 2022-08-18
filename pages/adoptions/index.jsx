@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/myadoption",
+    "https://golangprojectku.site/adoptions",
     requestOptions
   );
   const data = await response.json();

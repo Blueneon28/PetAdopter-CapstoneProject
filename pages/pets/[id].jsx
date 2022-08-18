@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { getCookie, deleteCookie } from "cookies-next";
+import jwt_decode from "jwt-decode";
 
 import Layout from "../../components/Layout";
 
@@ -9,6 +10,7 @@ export async function getServerSideProps({ req, res, params }) {
   const { id } = params;
 
   const token = getCookie("token", { req, res });
+  const jwtDecode = jwt_decode(token);
   if (!token) {
     return {
       redirect: {
@@ -24,13 +26,19 @@ export async function getServerSideProps({ req, res, params }) {
     },
   };
   const response = await fetch(
-    `https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/pets/${id}`,
+    `https://golangprojectku.site/pets/${id}`,
     requestOptions
   );
   const data = await response.json();
   if (response.status === 200) {
     return {
-      props: { code: data.code, data: data.data, message: data.message, token },
+      props: {
+        code: data.code,
+        data: data.data,
+        message: data.message,
+        token,
+        jwtDecode,
+      },
     };
   } else {
     deleteCookie("token");
@@ -43,15 +51,21 @@ export async function getServerSideProps({ req, res, params }) {
   }
 }
 
-export default function PetDetail({ data, token }) {
+export default function PetDetail({ data, token, jwtDecode }) {
+  const { ID } = jwtDecode;
   const [pet, setPet] = useState(data);
 
   return (
     <Layout headTitle="Pet Detail" headDesc="Welcome to petdopter!">
       <div className="w-full h-full flex flex-col md:flex-row md:p-4">
         <div className="w-full h-1/4 md:h-auto md:w-2/5 md:py-2 px-6">
-          {/* <Image src={pet.petphoto} alt={name} width={50} height={80} /> */}
-          <img src={pet.petphoto} alt={pet.petname} />
+          <Image
+            src={pet.petphoto}
+            alt={pet.petname}
+            width={1920}
+            height={1080}
+            layout={"responsive"}
+          />
         </div>
         <div className="w-full h-full rounded-t-3xl md:rounded-t-none">
           <div className="h-full p-4 md:p-0 flex flex-col justify-between">

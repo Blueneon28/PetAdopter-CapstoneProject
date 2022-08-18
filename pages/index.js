@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { getCookie, deleteCookie } from "cookies-next";
 
+import { MdAddCircle } from "react-icons/md";
+
 import Layout from "../components/Layout";
 import TitlePage from "../components/TitlePage";
 import PetCategory from "../components/PetCategory";
 import PetCard from "../components/PetCard";
+import Link from "next/link";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -23,7 +26,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/pets",
+    "https://golangprojectku.site/pets",
     requestOptions
   );
   const data = await response.json();
@@ -42,7 +45,7 @@ export async function getServerSideProps({ req, res }) {
   }
 }
 
-export default function Home({ data, token }) {
+export default function Home({ data }) {
   const [pets, setPets] = useState(data);
   const [loading, setLoading] = useState(false);
 
@@ -66,6 +69,30 @@ export default function Home({ data, token }) {
             />
           ))}
         </div>
+        <Link href="/pets/createPet">
+          <div className="absolute right-4 bottom-20 md:bottom-4">
+            <div className="md:hidden">
+              <MdAddCircle size={55} color={"FFC700"} className="dark:hidden" />
+            </div>
+            <div className="md:hidden">
+              <MdAddCircle
+                size={55}
+                color={"CDA000"}
+                className="hidden dark:block"
+              />
+            </div>
+            <div className="hidden md:block">
+              <MdAddCircle size={75} color={"FFC700"} className="dark:hidden" />
+            </div>
+            <div className="hidden md:block">
+              <MdAddCircle
+                size={75}
+                color={"FFC700"}
+                className="hidden dark:block"
+              />
+            </div>
+          </div>
+        </Link>
       </div>
     </Layout>
   );
