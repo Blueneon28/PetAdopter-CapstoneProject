@@ -4,6 +4,7 @@ import { getCookie, deleteCookie } from "cookies-next";
 import { useRouter } from "next/router";
 
 import Layout from "../../components/Layout";
+import TitlePage from "../../components/TitlePage";
 import { SmallButton } from "../../components/CustomButton";
 import { CustomInput, CustomInputComboBox } from "../../components/CustomInput";
 
@@ -85,122 +86,123 @@ export default function EditProfile({ data, token }) {
     setObjSubmit(temp);
   };
   return (
-    <Layout>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="pt-10">
-          <div className="grid grid-cols-1 justify-items-center">
-            <div className="font-bold text-xl md:text-2xl lg:text-2xl pr-44 md:pr-96 lg:w-4/5">
-              <h1>Edit Profile</h1>
-            </div>
-            <div className="border-t-2 border-black dark:border-white w-72 md:w-96 pb-4 md:px-64 lg:w-4/5"></div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
-              <div className="grid justify-items-center">
-                <div className="avatar flex md:hidden lg:hidden">
-                  <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
-                    <Image
-                      className="rounded-full"
-                      src={dataUser.photoprofile}
-                      alt={dataUser.photoprofile}
-                      width={150}
-                      height={150}
-                    />
+    <Layout headTitle={`${data.fullname}`} headDesc="Edit Profile">
+      <div className="p-4 md:px-12 lg:px-24">
+        <TitlePage page="Edit Profile" />
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="py-4 md:py-6 font-Poppins">
+            <div className="grid grid-cols-1 justify-items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
+                <div className="grid justify-items-center">
+                  <div className="avatar flex md:hidden lg:hidden">
+                    <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                      <Image
+                        className="rounded-full"
+                        src={dataUser.photoprofile}
+                        alt={dataUser.photoprofile}
+                        width={150}
+                        height={150}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="avatar hidden md:flex lg:flex">
-                  <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
-                    <Image
-                      className="rounded-full"
-                      src={dataUser.photoprofile}
-                      alt={dataUser.photoprofile}
-                      width={300}
-                      height={300}
-                    />
+                  <div className="avatar hidden md:flex lg:flex">
+                    <div className="w-36 md:w-52 lg:w-72 rounded-full ring ring-primary">
+                      <Image
+                        className="rounded-full"
+                        src={dataUser.photoprofile}
+                        alt={dataUser.photoprofile}
+                        width={300}
+                        height={300}
+                      />
+                    </div>
                   </div>
+                  <input
+                    className="mt-4 input input-bordered input-primary input-sm md:input-md lg:input-md w-48 md:w-80 lg:w-80 p-1 rounded-lg font-light text-xs md:text-xl lg:text-xl border-2 border-accent font-Poppins dark:bg-black"
+                    id="inputFile"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      setDataUser({
+                        ...dataUser,
+                        photoprofile: URL.createObjectURL(e.target.files[0]),
+                      });
+                      handleChange(e.target.files[0], "photoprofile");
+                    }}
+                  />
                 </div>
-                <input
-                  className="mt-4 input input-bordered input-primary input-sm md:input-md lg:input-md w-48 md:w-80 lg:w-80 p-1 rounded-lg font-light text-xs md:text-xl lg:text-xl border-2 border-accent font-Poppins dark:bg-black"
-                  id="inputFile"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    setDataUser({
-                      ...dataUser,
-                      photoprofile: URL.createObjectURL(e.target.files[0]),
-                    });
-                    handleChange(e.target.files[0], "photoprofile");
-                  }}
-                />
-              </div>
-              <div className="mt-4 grid grid-cols-1 justify-items-center gap-y-2 md:gap-y-4">
-                <CustomInput
-                  id="inputFullName"
-                  type="text"
-                  placeholder="Full name"
-                  value={dataUser.fullname}
-                  onChange={(e) => handleChange(e.target.value, "fullname")}
-                />
-                <CustomInputComboBox
-                  id="inputCity"
-                  title="City"
-                  op1="Jakarta"
-                  op2="Malang"
-                  op3="Semarang"
-                  value={dataUser.city}
-                  onChange={(e) => handleChange(e.target.value, "city")}
-                />
-                <CustomInput
-                  id="inputFullAddress"
-                  type="text"
-                  placeholder="Full address"
-                  value={dataUser.address}
-                  onChange={(e) => handleChange(e.target.value, "address")}
-                />
-                <CustomInput
-                  id="inputUsername"
-                  type="text"
-                  placeholder="Username"
-                  value={dataUser.username}
-                  onChange={(e) => handleChange(e.target.value, "username")}
-                />
-                <CustomInput
-                  id="inputEmail"
-                  type="email"
-                  placeholder="Email"
-                  value={dataUser.email}
-                  onChange={(e) => handleChange(e.target.value, "email")}
-                />
-                <CustomInput
-                  id="inputPhoneNumber"
-                  type="number"
-                  placeholder="Phone number"
-                  value={dataUser.phonenumber}
-                  onChange={(e) => handleChange(e.target.value, "phonenumber")}
-                />
-                <CustomInput
-                  id="inputPassword"
-                  type="password"
-                  placeholder="Password"
-                  value={dataUser.password}
-                  onChange={(e) => handleChange(e.target.value, "password")}
-                />
+                <div className="mt-4 grid grid-cols-1 justify-items-center gap-y-2 md:gap-y-4">
+                  <CustomInput
+                    id="inputFullName"
+                    type="text"
+                    placeholder="Full name"
+                    value={dataUser.fullname}
+                    onChange={(e) => handleChange(e.target.value, "fullname")}
+                  />
+                  <CustomInputComboBox
+                    id="inputCity"
+                    title="City"
+                    op1="Jakarta"
+                    op2="Malang"
+                    op3="Semarang"
+                    value={dataUser.city}
+                    onChange={(e) => handleChange(e.target.value, "city")}
+                  />
+                  <CustomInput
+                    id="inputFullAddress"
+                    type="text"
+                    placeholder="Full address"
+                    value={dataUser.address}
+                    onChange={(e) => handleChange(e.target.value, "address")}
+                  />
+                  <CustomInput
+                    id="inputUsername"
+                    type="text"
+                    placeholder="Username"
+                    value={dataUser.username}
+                    onChange={(e) => handleChange(e.target.value, "username")}
+                  />
+                  <CustomInput
+                    id="inputEmail"
+                    type="email"
+                    placeholder="Email"
+                    value={dataUser.email}
+                    onChange={(e) => handleChange(e.target.value, "email")}
+                  />
+                  <CustomInput
+                    id="inputPhoneNumber"
+                    type="number"
+                    placeholder="Phone number"
+                    value={dataUser.phonenumber}
+                    onChange={(e) =>
+                      handleChange(e.target.value, "phonenumber")
+                    }
+                  />
+                  <CustomInput
+                    id="inputPassword"
+                    type="password"
+                    placeholder="Password"
+                    value={dataUser.password}
+                    onChange={(e) => handleChange(e.target.value, "password")}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-          <SmallButton
-            onClick={(e) => handleSubmit(e)}
-            label="Done"
-            loading={loading}
-            className="bg-primary text-white font-semibold"
-          />
-          <SmallButton
-            href="/profile"
-            label="cancel"
-            className="text-black bg-accent"
-          />
-        </div>
-      </form>
+          <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
+            <SmallButton
+              onClick={(e) => handleSubmit(e)}
+              label="Done"
+              loading={loading}
+              className="bg-primary text-white font-semibold"
+            />
+            <SmallButton
+              href="/profile"
+              label="cancel"
+              className="text-black bg-accent"
+            />
+          </div>
+        </form>
+      </div>
     </Layout>
   );
 }

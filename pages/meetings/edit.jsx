@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getCookie, deleteCookie } from "cookies-next";
 
 import Layout from "../../components/Layout";
+import TitlePage from "../../components/TitlePage";
 import { CustomInput } from "../../components/CustomInput";
 import { SmallButton } from "../../components/CustomButton";
 
@@ -80,43 +81,43 @@ export default function EditMeeting({ data, token }) {
     setObjSubmit(temp);
   };
   return (
-    <Layout>
-      <div className="pt-10">
-        <div className="grid grid-cols-1 gap-5 justify-items-center">
-          <div className="font-bold text-xl md:text-2xl pr-24 md:pr-40 border-b-2 border-black dark:border-white">
-            <h1>Meeting Invitation</h1>
-          </div>
-          <div className="grid grid-cols-1 gap-5 md:w-96">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <div className="grid grid-cols-1 justify-items-center gap-2">
-                <CustomInput
-                  id="inputDate"
-                  type="date"
-                  placeholder="Date"
-                  value={dataMeeting.date}
-                  onChange={(e) => handleChange(e.target.value, "date")}
-                />
-                <CustomInput
-                  id="inputTime"
-                  type="time"
-                  placeholder="Time"
-                  value={dataMeeting.time}
-                  onChange={(e) => handleChange(e.target.value, "time")}
-                />
-              </div>
-              <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                <SmallButton
-                  label="Update"
-                  loading={loading}
-                  className="text-white bg-primary font-semibold"
-                />
-                <SmallButton
-                  href="/meetings"
-                  label="cancel"
-                  className="text-black bg-accent"
-                />
-              </div>
-            </form>
+    <Layout headTitle="Meeting Invitation" headDesc="Edit Meeting Invitation">
+      <div className="p-4 md:px-12 lg:px-24">
+        <TitlePage page="Meeting Invitation" />
+        <div className="py-4 md:py-6 font-Poppins">
+          <div className="grid grid-cols-1 gap-5 justify-items-center">
+            <div className="grid grid-cols-1 gap-5 md:w-96">
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="grid grid-cols-1 justify-items-center gap-2">
+                  <CustomInput
+                    id="inputDate"
+                    type="date"
+                    placeholder="Date"
+                    value={dataMeeting.date}
+                    onChange={(e) => handleChange(e.target.value, "date")}
+                  />
+                  <CustomInput
+                    id="inputTime"
+                    type="time"
+                    placeholder="Time"
+                    value={dataMeeting.time}
+                    onChange={(e) => handleChange(e.target.value, "time")}
+                  />
+                </div>
+                <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
+                  <SmallButton
+                    label="Update"
+                    loading={loading}
+                    className="text-white bg-primary font-semibold"
+                  />
+                  <SmallButton
+                    href="/meetings"
+                    label="cancel"
+                    className="text-black bg-accent"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
