@@ -8,8 +8,14 @@ export default function ApplierCard({ id, name, image, ownername, petname }) {
         <Link href={`/appliers/${id}`}>
           <div className="w-2/5">
             <div className="w-24 h-24 rounded-full border border-[#70BAC6] dark:border-[#568C95]">
-              {/* <Image src={image} alt={name} width={50} height={80} /> */}
-              <img src={image} alt={name} />
+              <Image
+                src={image}
+                alt={name}
+                width={1000}
+                height={1000}
+                fill="responsive"
+                className="rounded-full"
+              />
             </div>
           </div>
         </Link>
