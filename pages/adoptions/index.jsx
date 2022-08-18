@@ -53,11 +53,13 @@ export default function MyAdoptions({ data, token }) {
           {adoptions.map((adoption) => (
             <AdoptionCard
               key={adoption.adoptionid}
+              token={token}
+              adoptionid={adoption.adoptionid}
               petid={adoption.petid}
               petname={adoption.petname}
               petimage={adoption.petphoto}
               ownername={adoption.ownername}
-              city={adoption.owneraddress}
+              city={adoption.ownercity}
               status={adoption.status}
             />
           ))}

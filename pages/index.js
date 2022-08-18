@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import { getCookie, deleteCookie } from "cookies-next";
 
 import { MdAddCircle } from "react-icons/md";
@@ -7,7 +8,6 @@ import Layout from "../components/Layout";
 import TitlePage from "../components/TitlePage";
 import PetCategory from "../components/PetCategory";
 import PetCard from "../components/PetCard";
-import Link from "next/link";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -51,12 +51,10 @@ export default function Home({ data }) {
 
   return (
     <Layout headTitle="Petdopter" headDesc="Welcome to petdopter!">
-      <div className="p-4 md:px-12 lg:px-24">
+      <div className="p-4 mb-12 md:px-12 lg:px-24">
         <TitlePage page="Discover" />
-        <div className="py-4 md:py-6">
-          <PetCategory />
-        </div>
-        <div className="my-2 grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12">
+
+        <div className="my-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12">
           {pets.map((pet) => (
             <PetCard
               key={pet.id}
@@ -70,7 +68,7 @@ export default function Home({ data }) {
           ))}
         </div>
         <Link href="/pets/createPet">
-          <div className="absolute right-4 bottom-20 md:bottom-4">
+          <div className="fixed right-4 bottom-20 md:bottom-4">
             <div className="md:hidden">
               <MdAddCircle size={55} color={"FFC700"} className="dark:hidden" />
             </div>

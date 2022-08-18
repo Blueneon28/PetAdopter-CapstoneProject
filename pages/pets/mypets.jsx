@@ -1,5 +1,8 @@
 import { useState } from "react";
+import Link from "next/link";
 import { getCookie, deleteCookie } from "cookies-next";
+
+import { MdAddCircle } from "react-icons/md";
 
 import Layout from "../../components/Layout";
 import TitlePage from "../../components/TitlePage";
@@ -62,6 +65,30 @@ export default function MyPets({ data, token }) {
             />
           ))}
         </div>
+        <Link href="/pets/createPet">
+          <div className="fixed right-4 bottom-20 md:bottom-4">
+            <div className="md:hidden">
+              <MdAddCircle size={55} color={"FFC700"} className="dark:hidden" />
+            </div>
+            <div className="md:hidden">
+              <MdAddCircle
+                size={55}
+                color={"CDA000"}
+                className="hidden dark:block"
+              />
+            </div>
+            <div className="hidden md:block">
+              <MdAddCircle size={75} color={"FFC700"} className="dark:hidden" />
+            </div>
+            <div className="hidden md:block">
+              <MdAddCircle
+                size={75}
+                color={"FFC700"}
+                className="hidden dark:block"
+              />
+            </div>
+          </div>
+        </Link>
       </div>
     </Layout>
   );

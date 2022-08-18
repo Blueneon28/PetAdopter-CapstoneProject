@@ -3,10 +3,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { getCookie, deleteCookie } from "cookies-next";
 
-import Layout from "../../components/Layout";
-import TitlePage from "../../components/TitlePage";
+import Layout from "../../../components/Layout";
+import TitlePage from "../../../components/TitlePage";
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res, params }) {
+  const { id } = params;
+
   const token = getCookie("token", { req, res });
   if (!token) {
     return {
@@ -23,7 +25,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    `https://golangprojectku.site/species`,
+    `https://golangprojectku.site/pets/${id}`,
     requestOptions
   );
   const data = await response.json();
@@ -34,6 +36,7 @@ export async function getServerSideProps({ req, res }) {
         data: data.data,
         message: data.message,
         token,
+        id,
       },
     };
   } else {
@@ -47,15 +50,13 @@ export async function getServerSideProps({ req, res }) {
   }
 }
 
-export default function OpenAdopt({ data, token }) {
+export default function EditPet({ data, token, id }) {
   const router = useRouter();
 
-  const [dataPet, setDataPet] = useState([]);
+  const [dataPet, setDataPet] = useState(data);
+  const { petname } = dataPet;
   const [objSubmit, setObjSubmit] = useState({});
   const fileInput = useRef(null);
-  const categoryOptions = data.map((species) => {
-    return { value: species.id, label: species.species };
-  });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -67,19 +68,19 @@ export default function OpenAdopt({ data, token }) {
     }
 
     var requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
       },
       body: formData,
     };
 
-    fetch("https://golangprojectku.site/pets", requestOptions)
+    fetch(`https://golangprojectku.site/pets/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { code, message } = result;
         if (code === 200) {
-          router.push("/pets/mypets");
+          router.push(`/pets/${id}`);
         }
         alert(message);
         setObjSubmit({});
@@ -96,10 +97,11 @@ export default function OpenAdopt({ data, token }) {
   const handleUploadFile = (e) => {
     fileInput.current.click();
   };
+  console.log(objSubmit);
   return (
-    <Layout headTitle="Open Adopt" headDesc="Welcome to petdopter!">
+    <Layout headTitle="Edit Pet" headDesc="Welcome to petdopter!">
       <div className="p-4 md:px-12 lg:px-24">
-        <TitlePage page="Open Adopt" />
+        <TitlePage page="Edit Pet" />
         <div className="p-4">
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className="flex flex-col lg:flex-row lg:justify-between">
@@ -159,6 +161,7 @@ export default function OpenAdopt({ data, token }) {
                     required={true}
                     placeholder="Type your pet names here..."
                     className="input input-primary w-full rounded-full"
+                    defaultValue={dataPet.petname}
                     onChange={(e) => handleChange(e.target.value, "petname")}
                   />
                 </div>
@@ -175,11 +178,13 @@ export default function OpenAdopt({ data, token }) {
                       handleChange(parseInt(e.target.value), "speciesid");
                     }}
                   >
-                    <option disabled selected>
-                      Choose your pet category
+                    <option disabled>Choose your pet category</option>
+                    <option value={2} selected={dataPet.species === "Kucing"}>
+                      Cat
                     </option>
-                    <option value={2}>Cat</option>
-                    <option value={1}>Dog</option>
+                    <option value={1} selected={dataPet.species === "Anjing"}>
+                      Dog
+                    </option>
                   </select>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between">
@@ -198,6 +203,7 @@ export default function OpenAdopt({ data, token }) {
                             name="radio-gender"
                             className="radio radio-primary"
                             value={1}
+                            defaultChecked={dataPet.gender === 1}
                             onChange={(e) => {
                               handleChange(parseInt(e.target.value), "gender");
                             }}
@@ -213,6 +219,7 @@ export default function OpenAdopt({ data, token }) {
                             required={true}
                             className="radio radio-primary"
                             value={2}
+                            defaultChecked={dataPet.gender === 2}
                             onChange={(e) =>
                               handleChange(parseInt(e.target.value), "gender")
                             }
@@ -234,6 +241,7 @@ export default function OpenAdopt({ data, token }) {
                         required={true}
                         placeholder="Enter a number..."
                         className="input input-primary w-1/2 rounded-full"
+                        defaultValue={dataPet.age}
                         onChange={(e) => handleChange(e.target.value, "age")}
                       />
                       <span className="ml-2 italic">months</span>
@@ -251,6 +259,7 @@ export default function OpenAdopt({ data, token }) {
                     required={true}
                     placeholder="Type your pet colors here..."
                     className="input input-primary w-full rounded-full"
+                    defaultValue={dataPet.color}
                     onChange={(e) => handleChange(e.target.value, "color")}
                   />
                 </div>
@@ -266,6 +275,7 @@ export default function OpenAdopt({ data, token }) {
                     className="textarea textarea-primary rounded-2xl h-32 lg:h-96"
                     required={true}
                     placeholder="Tell seeker about yout pet..."
+                    defaultValue={dataPet.description}
                     onChange={(e) =>
                       handleChange(e.target.value, "description")
                     }

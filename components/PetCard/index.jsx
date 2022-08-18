@@ -6,8 +6,14 @@ export default function PetCard({ id, name, image, city, gender, age }) {
     <div className="p-2 border-2 border-[#70BAC6] dark:border-[#568C95] rounded-xl">
       <div className="flex items-center">
         <div className="w-2/5">
-          {/* <Image src={image} alt={name} width={50} height={80} /> */}
-          <img src={image} alt={name} />
+          <Image
+            src={image}
+            alt={name}
+            width={1200}
+            height={1600}
+            layout={"responsive"}
+            className="rounded-md"
+          />
         </div>
         <div className="w-full flex flex-col mx-2">
           <h1 className="font-bold text-lg">{name}</h1>
