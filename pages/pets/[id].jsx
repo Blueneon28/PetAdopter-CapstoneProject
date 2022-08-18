@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { getCookie, deleteCookie } from "cookies-next";
 import jwt_decode from "jwt-decode";
 
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import Layout from "../../components/Layout";
 
 export async function getServerSideProps({ req, res, params }) {
@@ -38,6 +41,7 @@ export async function getServerSideProps({ req, res, params }) {
         message: data.message,
         token,
         jwtDecode,
+        id,
       },
     };
   } else {
@@ -51,29 +55,109 @@ export async function getServerSideProps({ req, res, params }) {
   }
 }
 
-export default function PetDetail({ data, token, jwtDecode }) {
+export default function PetDetail({ data, token, jwtDecode, id }) {
   const { ID } = jwtDecode;
+  const router = useRouter();
+  const { query } = router;
+
   const [pet, setPet] = useState(data);
+  const [loading, setLoading] = useState(false);
+
+  const handleAdopt = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    const body = {
+      petid: parseInt(id),
+    };
+
+    var requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+
+    fetch("https://golangprojectku.site/appliers", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { code, message } = result;
+        if (code === 200) {
+          router.push("/adoptions");
+        }
+        alert(message);
+      })
+      .catch((error) => alert(error.toString()))
+      .finally(() => setLoading(false));
+  };
+
+  const handleDelete = () => {
+    var requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    fetch(`https://golangprojectku.site/pets/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { code, message } = result;
+        if (code === 200) {
+          router.push(`/pets/mypets`);
+        }
+        alert(message);
+      })
+      .catch((error) => alert(error.toString()));
+  };
 
   return (
     <Layout headTitle="Pet Detail" headDesc="Welcome to petdopter!">
       <div className="w-full h-full flex flex-col md:flex-row md:p-4">
-        <div className="w-full h-1/4 md:h-auto md:w-2/5 md:py-2 px-6">
+        <div className="w-full md:hidden">
           <Image
             src={pet.petphoto}
             alt={pet.petname}
-            width={1920}
+            width={1080}
             height={1080}
             layout={"responsive"}
           />
         </div>
-        <div className="w-full h-full rounded-t-3xl md:rounded-t-none">
+        <div className="w-1/4 hidden md:block mr-8">
+          <Image
+            src={pet.petphoto}
+            alt={pet.petname}
+            width={1200}
+            height={1600}
+            layout={"responsive"}
+            className="rounded-md"
+          />
+        </div>
+        <div className="w-full h-full -mt-20 md:mt-0 z-10 bg-white dark:bg-black rounded-t-3xl md:rounded-t-none">
           <div className="h-full p-4 md:p-0 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center my-2">
-                <h1 className="font-bold text-xl md:text-2xl lg:text-3xl">
-                  {pet.petname}
-                </h1>
+                <div className="inline-flex">
+                  <h1 className="font-bold text-xl md:text-2xl lg:text-3xl">
+                    {pet.petname}
+                  </h1>
+                  {ID === pet.ownerid ? (
+                    <>
+                      <Link href={`/pets/editPet/${parseInt(query.id)}`}>
+                        <button className="mx-2">
+                          <MdModeEdit size={25} />
+                        </button>
+                      </Link>
+                      <button className="mx-1" onClick={() => handleDelete()}>
+                        <MdDelete size={25} />
+                      </button>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 <h5 className="italic text-xs md:text-sm text-[#D9D9D9]">
                   {pet.species}
                 </h5>
@@ -117,10 +201,21 @@ export default function PetDetail({ data, token, jwtDecode }) {
               </div>
             </div>
 
-            <div className="text-center md:my-12">
-              <button className="w-3/4 md:w-1/2 bg-[#FFC700] dark:bg-[#CDA000] text-white p-1 rounded-full font-bold text-lg md:text-xl">
-                Apply Adopt
-              </button>
+            <div className="text-center mb-20 md:my-12">
+              {ID !== pet.ownerid ? (
+                <button
+                  className="w-3/4 md:w-1/2 bg-[#FFC700] dark:bg-[#CDA000] text-white p-1 rounded-full font-bold text-lg md:text-xl"
+                  onClick={(e) => handleAdopt(e)}
+                >
+                  Apply Adopt
+                </button>
+              ) : (
+                <Link href="/appliers">
+                  <button className="w-3/4 md:w-1/2 bg-[#FFC700] dark:bg-[#CDA000] text-white p-1 rounded-full font-bold text-lg md:text-xl">
+                    View Applier
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
