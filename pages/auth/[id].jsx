@@ -12,6 +12,8 @@ export default function Redirect() {
     if (token) {
       setCookie("token", token);
       role === "user" ? router.replace("/") : router.replace("/admin");
+    } else {
+      router.replace("/auth/register");
     }
   }, []);
   return;
