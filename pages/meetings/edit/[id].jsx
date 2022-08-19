@@ -27,7 +27,6 @@ export async function getServerSideProps({ req, res, params }) {
   };
   const response = await fetch(
     `https://golangprojectku.site/meetings/${id}`,
-    // `https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings`,
 
     requestOptions
   );
@@ -49,9 +48,7 @@ export async function getServerSideProps({ req, res, params }) {
 
 export default function EditMeeting({ data, token }) {
   const [date, setDate] = useState("");
-  const [time, setTime] = useState(data[0].time);
-  // const [date, setDate] = useState(data.date);
-  // const [time, setTime] = useState(data.time);
+  const [time, setTime] = useState(data.time);
   const [objSubmit, setObjSubmit] = useState({});
 
   const [loading, setLoading] = useState(false);

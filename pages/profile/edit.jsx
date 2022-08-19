@@ -46,18 +46,19 @@ export async function getServerSideProps({ req, res }) {
 
 export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
+  const [password, setPassword] = useState(data.password);
   const [objSubmit, setObjSubmit] = useState({});
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (objSubmit.password) {
+    if (password) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [objSubmit.password]);
+  }, [password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -191,7 +192,10 @@ export default function EditProfile({ data, token }) {
                     type="password"
                     placeholder="Password"
                     value={dataUser.password}
-                    onChange={(e) => handleChange(e.target.value, "password")}
+                    onChange={(e) => {
+                      setPassword(e.target.value),
+                        handleChange(e.target.value, "password");
+                    }}
                   />
                 </div>
               </div>

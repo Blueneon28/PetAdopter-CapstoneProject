@@ -24,32 +24,6 @@ export async function getServerSideProps({ req, res, params }) {
       adoptionid: id,
     },
   };
-
-  // const requestOptions = {
-  //   method: "GET",
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
-  // const response = await fetch(
-  //   // `https://golangprojectku.site/adoptions/${id}`,
-  //   `https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/adoptions/${id}`,
-  //   requestOptions
-  // );
-  // const data = await response.json();
-  // if (response.status === 200) {
-  //   return {
-  //     props: { code: data.code, data: data.data, message: data.message, token },
-  //   };
-  // } else {
-  //   deleteCookie("token");
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/auth/login",
-  //     },
-  //   };
-  // }
 }
 
 export default function AddMeeting({ token, adoptionid }) {
