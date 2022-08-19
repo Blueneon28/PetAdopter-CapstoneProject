@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getCookie, deleteCookie } from "cookies-next";
 import { useRouter } from "next/router";
@@ -48,7 +48,16 @@ export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
   const [objSubmit, setObjSubmit] = useState({});
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    if (objSubmit.password) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [objSubmit.password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -99,7 +108,7 @@ export default function EditProfile({ data, token }) {
                       <Image
                         className="rounded-full"
                         src={dataUser.photoprofile}
-                        alt={dataUser.photoprofile}
+                        alt={dataUser.username}
                         width={150}
                         height={150}
                       />
@@ -110,7 +119,7 @@ export default function EditProfile({ data, token }) {
                       <Image
                         className="rounded-full"
                         src={dataUser.photoprofile}
-                        alt={dataUser.photoprofile}
+                        alt={dataUser.username}
                         width={300}
                         height={300}
                       />
@@ -192,7 +201,7 @@ export default function EditProfile({ data, token }) {
             <SmallButton
               onClick={(e) => handleSubmit(e)}
               label="Done"
-              loading={loading}
+              loading={loading || disabled}
               className="bg-primary text-white font-semibold"
             />
             <SmallButton

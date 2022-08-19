@@ -22,8 +22,8 @@ export async function getServerSideProps({ req, res }) {
     },
   };
   const response = await fetch(
-    // "https://golangprojectku.site/meetings",
-    "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings",
+    "https://golangprojectku.site/meetings",
+    // "https://virtserver.swaggerhub.com/Capstone-tim1/PetAdopter-tim1/1.0.0/meetings",
     requestOptions
   );
   const data = await response.json();
@@ -43,7 +43,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 export default function MyAppointments({ data, token }) {
-  const [dataMeetings, setDataMeetings] = useState(data);
+  const [dataMeetings] = useState(data);
 
   return (
     <Layout
