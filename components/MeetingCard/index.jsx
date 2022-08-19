@@ -1,18 +1,29 @@
 import Link from "next/link";
 
-function MyAppointmentCard(data, id) {
-  const handleDelete = async (e) => {
+function MyAppointmentCard(
+  meetingid,
+  adoptionid,
+  date,
+  time,
+  place,
+  petname,
+  seekername
+) {
+  const handleDone = async (e) => {
     setLoading(true);
     e.preventDefault();
 
+    const raw = JSON.stringify({ status: "Adopted" });
+
     var requestOptions = {
-      method: "DELETE",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      body: raw,
     };
 
-    fetch(`https://golangprojectku.site/meetings/${id}`, requestOptions)
+    fetch(`https://golangprojectku.site/appliers/${adoptionid}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         const { message } = result;
@@ -23,6 +34,30 @@ function MyAppointmentCard(data, id) {
       })
       .finally(() => setLoading(false));
   };
+
+  const handleCancel = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    var requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    fetch(`https://golangprojectku.site/meetings/${meetingid}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { message } = result;
+        alert(message);
+      })
+      .catch((error) => {
+        alert(error, toString());
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <div className="grid grid-cols-1 gap-5 ">
       <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
@@ -30,40 +65,43 @@ function MyAppointmentCard(data, id) {
           <thead>
             <tr>
               <td className="font-medium">Date</td>
-              <td className="text-primary">{data.date}</td>
+              <td className="text-primary">{date}</td>
             </tr>
             <tr>
               <td className="font-medium">Time</td>
-              <td className="text-primary">{data.time}</td>
+              <td className="text-primary">{time}</td>
             </tr>
             <tr>
               <td className="font-medium">Place</td>
-              <td className="text-primary">{data.place}</td>
+              <td className="text-primary">{place}</td>
             </tr>
             <tr>
               <td className="font-medium">Pet name</td>
-              <td className="text-primary">{data.petname}</td>
+              <td className="text-primary">{petname}</td>
             </tr>
             <tr>
               <td className="font-medium">Seeker name</td>
-              <td className="text-primary">{data.seekername}</td>
+              <td className="text-primary">{seekername}</td>
             </tr>
           </thead>
         </table>
         <div className="space-x-1 dark:text-black">
-          <Link href={`/meetings/edit/${id}`}>
+          <Link href={`/meetings/edit/${meetingid}`}>
             <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
               Edit
             </button>
           </Link>
-          <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
+          <button
+            onClick={(e) => handleDone(e)}
+            className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary"
+          >
             Done
           </button>
           <button
-            onClick={(e) => handleDelete(e)}
+            onClick={(e) => handleCancel(e)}
             className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500"
           >
-            Delete
+            Cancel
           </button>
         </div>
       </div>
@@ -71,7 +109,7 @@ function MyAppointmentCard(data, id) {
   );
 }
 
-function MyInvitationCard(data) {
+function MyInvitationCard(date, time, place, petname, ownername) {
   return (
     <div className="grid grid-cols-1 gap-5 ">
       <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
@@ -79,23 +117,23 @@ function MyInvitationCard(data) {
           <thead>
             <tr>
               <td className="font-medium">Date</td>
-              <td className="text-primary">{data.date}</td>
+              <td className="text-primary">{date}</td>
             </tr>
             <tr>
               <td className="font-medium">Time</td>
-              <td className="text-primary">{data.time}</td>
+              <td className="text-primary">{time}</td>
             </tr>
             <tr>
               <td className="font-medium">Place</td>
-              <td className="text-primary">{data.place}</td>
+              <td className="text-primary">{place}</td>
             </tr>
             <tr>
               <td className="font-medium">Pet name</td>
-              <td className="text-primary">{data.petname}</td>
+              <td className="text-primary">{petname}</td>
             </tr>
             <tr>
               <td className="font-medium">Owner name</td>
-              <td className="text-primary">{data.ownername}</td>
+              <td className="text-primary">{ownername}</td>
             </tr>
           </thead>
         </table>

@@ -76,7 +76,8 @@ export default function MyAppointments({ data, token }) {
               {dataMeetings.map((data) => (
                 <MyAppointmentCard
                   key={data.meetingid}
-                  id={data.meetingid}
+                  meetingid={data.meetingid}
+                  adoptionid={data.adoptionid}
                   date={data.date}
                   time={data.time}
                   place={data.owneraddress}
