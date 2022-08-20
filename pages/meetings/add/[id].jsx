@@ -31,16 +31,7 @@ export default function AddMeeting({ token, adoptionid }) {
   const [time, setTime] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    if (date && time) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [date, time]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -85,27 +76,29 @@ export default function AddMeeting({ token, adoptionid }) {
                     id="inputDate"
                     type="date"
                     placeholder="Date"
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
                   <CustomInput
                     id="inputTime"
                     type="time"
                     placeholder="Time"
+                    value={time}
                     onChange={(e) => setTime(e.target.value)}
                   />
                 </div>
                 <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                  <SmallButton
-                    onClick={(e) => handleSubmit(e)}
-                    label="Add"
-                    loading={loading || disabled}
+                  <button
+                    className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary text-white"
+                    disabled={loading}
                     type="submit"
-                    className="bg-primary text-white font-semibold"
-                  />
+                  >
+                    Add
+                  </button>
                   <SmallButton
                     href="/appliers"
                     label="cancel"
-                    className="text-black bg-accent"
+                    className="bg-accent"
                   />
                 </div>
               </form>

@@ -52,15 +52,6 @@ export default function EditMeeting({ data, token }) {
   const [objSubmit, setObjSubmit] = useState({});
 
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    if (date && time) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [date, time]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -130,16 +121,17 @@ export default function EditMeeting({ data, token }) {
                   />
                 </div>
                 <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                  <SmallButton
-                    onClick={(e) => handleSubmit(e)}
-                    label="Update"
-                    loading={loading || disabled}
-                    className="text-white bg-primary font-semibold"
-                  />
+                  <button
+                    className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary text-black hover:text-white"
+                    disabled={loading}
+                    type="submit"
+                  >
+                    Update
+                  </button>
                   <SmallButton
                     href="/meetings/myappointments"
                     label="cancel"
-                    className="text-black bg-accent"
+                    className="text-black hover:text-white bg-accent"
                   />
                 </div>
               </form>

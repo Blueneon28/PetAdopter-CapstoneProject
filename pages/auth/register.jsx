@@ -16,23 +16,6 @@ export default function Register() {
   const [phonenumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    if (
-      fullname &&
-      city &&
-      address &&
-      username &&
-      email &&
-      phonenumber &&
-      password
-    ) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [fullname, city, address, username, email, phonenumber, password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -151,7 +134,7 @@ export default function Register() {
                   id="signupButton"
                   type="submit"
                   label="Sign up"
-                  loading={loading || disabled}
+                  loading={loading}
                 />
               </div>
             </form>

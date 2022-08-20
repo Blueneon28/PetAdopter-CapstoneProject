@@ -11,16 +11,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    if (username && password) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [username, password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -103,7 +94,7 @@ export default function Login() {
                   id="loginButton"
                   type="submit"
                   label="Login"
-                  loading={loading || disabled}
+                  loading={loading}
                   className="bg-primary font-semibold text-white"
                 />
               </div>
