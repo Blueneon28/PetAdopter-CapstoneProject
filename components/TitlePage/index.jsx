@@ -1,12 +1,19 @@
 import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { MdDehaze, MdLightMode, MdModeNight } from "react-icons/md";
+import {
+  MdDehaze,
+  MdLightMode,
+  MdModeNight,
+  MdChevronLeft,
+} from "react-icons/md";
 import Logo from "../../assets/img/logo-petdopter.png";
 import { ThemeContext } from "../../utils/context";
 
 export default function TitlePage({ page = "Title" }) {
+  const router = useRouter();
   const { theme, setTheme } = useContext(ThemeContext);
   const handleTheme = (mode) => {
     setTheme(mode);
@@ -20,7 +27,9 @@ export default function TitlePage({ page = "Title" }) {
             <Image src={Logo} alt="Logo" width={25} height={35} />
           </div>
         ) : (
-          ""
+          <button onClick={() => router.back()}>
+            <MdChevronLeft size={35} />
+          </button>
         )}
         <h1 className="font-bold text-xl md:text-2xl lg:text-3xl">{page}</h1>
       </div>
