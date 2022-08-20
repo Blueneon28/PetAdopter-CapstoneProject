@@ -46,7 +46,7 @@ export default function TitlePage({ page = "Title" }) {
         </Link>
       </div>
       {page === "More" ? (
-        <div className="block py-2">
+        <div className="block py-2 md:hidden">
           {theme === "light" ? (
             <div
               onClick={() => handleTheme(theme === "dark" ? "light" : "dark")}

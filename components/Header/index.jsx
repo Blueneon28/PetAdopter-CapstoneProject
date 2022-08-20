@@ -8,6 +8,7 @@ import {
   MdOutlineHome,
   MdPets,
   MdMoreHoriz,
+  MdMoreVert,
   MdOutlineAccountCircle,
   MdLightMode,
   MdModeNight,
@@ -106,7 +107,7 @@ export default function Header() {
               </a>
             </Link>
           </nav>
-          <div className="flex">
+          <div className="flex items-center">
             <button type="button" className="p-1 rounded-full lg:hidden">
               {theme === "light" ? (
                 <MdModeNight size={20} onClick={() => handleTheme("dark")} />
@@ -135,12 +136,13 @@ export default function Header() {
                 </div>
               )}
             </div>
-            <Link href="/profile">
-              <a className="ml-6">
-                <MdOutlineAccountCircle size={35} className="lg:hidden" />
-                <MdOutlineAccountCircle size={40} className="hidden lg:block" />
-              </a>
-            </Link>
+            <nav className="flex">
+              <Link href="/more">
+                <a className="ml-6 items-center">
+                  <MdMoreVert size={30} />
+                </a>
+              </Link>
+            </nav>
           </div>
         </div>
       </div>
