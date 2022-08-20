@@ -80,7 +80,7 @@ export default function AdoptionCard({
               See More
             </button>
           </Link>
-          {status === "Waiting" || status === "Requested" ? (
+          {status === "Requested" ? (
             <button
               className="w-full my-1 rounded-full bg-[#D98481] dark:bg-[#AF6C6A] text-white font-medium text-xs p-1"
               onClick={(e) => handleCancel(e)}

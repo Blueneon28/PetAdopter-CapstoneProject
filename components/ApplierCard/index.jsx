@@ -1,7 +1,81 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function ApplierCard({ id, name, image, ownername, petname }) {
+export default function ApplierCard({
+  id,
+  adoptionid,
+  name,
+  image,
+  ownername,
+  petname,
+  status,
+  token,
+}) {
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleAccept = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    const body = {
+      status: "Accepted",
+    };
+
+    var requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+
+    fetch(`https://golangprojectku.site/appliers/${adoptionid}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { code, message } = result;
+        if (code === 200) {
+          router.reload();
+        }
+        alert(message);
+      })
+      .catch((error) => alert(error.toString()))
+      .finally(() => setLoading(false));
+  };
+
+  const handleReject = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    const body = {
+      status: "Rejected",
+    };
+
+    var requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+
+    fetch(`https://golangprojectku.site/appliers/${adoptionid}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const { code, message } = result;
+        if (code === 200) {
+          router.reload();
+        }
+        alert(message);
+      })
+      .catch((error) => alert(error.toString()))
+      .finally(() => setLoading(false));
+  };
   return (
     <div className="p-2 border-2 border-[#70BAC6] dark:border-[#568C95] rounded-xl">
       <div className="flex items-center">
@@ -29,14 +103,30 @@ export default function ApplierCard({ id, name, image, ownername, petname }) {
               adopt <span className="font-bold">{petname}</span>?&quot;
             </p>
           </div>
-          <div className="flex justify-between">
-            <button className="w-1/2 rounded-full bg-[#FFC700] dark:bg-[#CDA000] text-white font-medium text-xs p-1">
-              Accept
-            </button>
-            <button className="w-1/2 ml-4 rounded-full bg-[#D98481] dark:bg-[#AF6C6A] text-white font-medium text-xs p-1">
-              Reject
-            </button>
-          </div>
+          {status === "Requested" ? (
+            <div className="flex justify-between">
+              <button
+                className="w-1/2 rounded-full bg-[#FFC700] dark:bg-[#CDA000] text-white font-medium text-xs p-1"
+                onClick={(e) => handleAccept(e)}
+              >
+                Accept
+              </button>
+              <button
+                className="w-1/2 ml-4 rounded-full bg-[#D98481] dark:bg-[#AF6C6A] text-white font-medium text-xs p-1"
+                onClick={(e) => handleReject(e)}
+              >
+                Reject
+              </button>
+            </div>
+          ) : status === "Accepted" ? (
+            <Link href={`/meetings/add/${adoptionid}`}>
+              <button className="w-full rounded-full bg-[#DDFFF9] dark:bg-[#9EC8C1] text-black dark:text-white font-medium text-xs p-1">
+                Create Meeting Appointment
+              </button>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
