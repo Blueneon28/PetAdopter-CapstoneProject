@@ -53,7 +53,6 @@ export default function Home({ data }) {
     <Layout headTitle="Petdopter" headDesc="Welcome to petdopter!">
       <div className="p-4 mb-12 md:px-12 lg:px-24">
         <TitlePage page="Discover" />
-
         <div className="my-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12">
           {pets.map((pet) => (
             <PetCard
