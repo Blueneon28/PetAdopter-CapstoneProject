@@ -3,7 +3,7 @@ import Header from "../Header";
 
 export default function Layout({ headTitle, headDesc, children }) {
   return (
-    <div className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white font-Poppins">
+    <div className="w-full bg-white dark:bg-black text-black dark:text-white font-Poppins">
       <Head>
         <title>{headTitle}</title>
         <meta name="description" content={headDesc} />
@@ -11,7 +11,7 @@ export default function Layout({ headTitle, headDesc, children }) {
       </Head>
 
       <Header />
-      <main className="w-full h-full">{children}</main>
+      <main className="w-full min-h-screen">{children}</main>
     </div>
   );
 }
