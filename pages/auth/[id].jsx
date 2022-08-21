@@ -16,6 +16,9 @@ export default function Redirect() {
       role === "user" ? router.replace("/") : router.replace("/admin");
     } else {
       router.replace("/auth/login");
+      alert(
+        "There is a problem with your account please contact Admin or try your another account"
+      );
     }
   }, []);
   return;
