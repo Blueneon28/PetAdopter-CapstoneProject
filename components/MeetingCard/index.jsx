@@ -1,14 +1,27 @@
 import Link from "next/link";
+import { useState } from "react";
 
-function MyAppointmentCard(
+export async function getServerSideProps({ req, res }) {
+  const token = getCookie("token", { req, res });
+  return {
+    props: {
+      token,
+    },
+  };
+}
+
+function MyAppointmentCard({
+  token,
   meetingid,
   adoptionid,
   date,
   time,
   place,
   petname,
-  seekername
-) {
+  seekername,
+}) {
+  console.log(token);
+  const [loading, setLoading] = useState(false);
   const handleDone = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -109,7 +122,7 @@ function MyAppointmentCard(
   );
 }
 
-function MyInvitationCard(date, time, place, petname, ownername) {
+function MyInvitationCard({ date, time, place, petname, ownername }) {
   return (
     <div className="grid grid-cols-1 gap-5 ">
       <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">

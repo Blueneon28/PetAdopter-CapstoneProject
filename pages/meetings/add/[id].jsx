@@ -8,8 +8,9 @@ import { CustomInput } from "../../../components/CustomInput";
 import { SmallButton } from "../../../components/CustomButton";
 
 export async function getServerSideProps({ req, res, params }) {
-  const token = getCookie("token", { req, res });
-  if (!token) {
+  const tokenoauth = getCookie("tokenoauth", { req, res });
+  const jwt = getCookie("token", { req, res });
+  if (!jwt) {
     return {
       redirect: {
         permanent: false,
@@ -21,14 +22,24 @@ export async function getServerSideProps({ req, res, params }) {
   const { id } = params;
   return {
     props: {
-      adoptionid: id,
+      id: id,
+      jwt: jwt,
+      tokenoauth: tokenoauth,
     },
   };
 }
 
-export default function AddMeeting({ token, adoptionid }) {
+export default function AddMeeting({ jwt, id, tokenoauth }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [token] = useState("");
+  const [adoptionid] = useState(21);
+  console.log(typeof jwt);
+  console.log(typeof token);
+  console.log(typeof adoptionid);
+  console.log(date);
+  console.log(time);
+  console.log(adoptionid);
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -45,7 +56,7 @@ export default function AddMeeting({ token, adoptionid }) {
     var requestOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify(body),
     };

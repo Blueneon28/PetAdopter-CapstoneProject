@@ -49,6 +49,7 @@ export async function getServerSideProps({ req, res }) {
 
 export default function MyAppointments({ data, token }) {
   const [dataMeetings] = useState(data);
+  console.log(dataMeetings);
   if (!data) {
     return (
       <Layout

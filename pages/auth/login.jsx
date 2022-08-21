@@ -31,7 +31,9 @@ export default function Login() {
         const { code, message, data } = result;
         if (code === 200) {
           const { token } = data;
+          const { tokenoauth } = data;
           setCookie("token", token);
+          setCookie("tokenoauth", tokenoauth);
           data.role === "user" ? router.push("/") : router.push("/admin");
         }
         alert(message);

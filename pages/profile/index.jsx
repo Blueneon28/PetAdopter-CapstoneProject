@@ -43,6 +43,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 export default function Profile({ data, token }) {
+  console.log(token);
   const [dataUser, setDataUser] = useState(data);
   const [loading, setLoading] = useState(false);
 
