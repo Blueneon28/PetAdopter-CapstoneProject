@@ -46,19 +46,23 @@ export async function getServerSideProps({ req, res }) {
 
 export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
-  const [password, setPassword] = useState(data.password);
+  const [email, setEmail] = useState(data.email);
+  // const [password, setPassword] = useState(data.password);
   const [objSubmit, setObjSubmit] = useState({});
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    setLoading(true);
+    // setLoading(true);
     e.preventDefault();
+
     const formData = new FormData();
+    formData.append("email", email);
     for (const key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
+    // formData.append(password, password);
 
     var requestOptions = {
       method: "PUT",
@@ -78,8 +82,8 @@ export default function EditProfile({ data, token }) {
         alert(message);
         setObjSubmit({});
       })
-      .catch((error) => alert(error.toString()))
-      .finally(() => setLoading(false));
+      .catch((error) => alert(error.toString()));
+    // .finally(() => setLoading(false));
   };
 
   const handleChange = (value, key) => {
@@ -163,13 +167,13 @@ export default function EditProfile({ data, token }) {
                     value={dataUser.username}
                     onChange={(e) => handleChange(e.target.value, "username")}
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     id="inputEmail"
                     type="email"
                     placeholder="Email"
                     value={dataUser.email}
-                    onChange={(e) => handleChange(e.target.value, "email")}
-                  />
+                    onChange={(e) => setEmail(e.target.value)}
+                  /> */}
                   <CustomInput
                     id="inputPhoneNumber"
                     type="number"
@@ -179,16 +183,13 @@ export default function EditProfile({ data, token }) {
                       handleChange(e.target.value, "phonenumber")
                     }
                   />
-                  <CustomInput
+                  {/* <CustomInput
                     id="inputPassword"
                     type="password"
                     placeholder="Password"
                     value={dataUser.password}
-                    onChange={(e) => {
-                      setPassword(e.target.value),
-                        handleChange(e.target.value, "password");
-                    }}
-                  />
+                    onChange={(e) => setPassword(e.target.value)}
+                  /> */}
                 </div>
               </div>
             </div>
@@ -196,7 +197,7 @@ export default function EditProfile({ data, token }) {
           <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
             <button
               className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary"
-              loading={loading}
+              // loading={loading}
             >
               Edit
             </button>

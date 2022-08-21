@@ -13,7 +13,6 @@ function MyAppointmentCard({
   petname,
   seekername,
 }) {
-  console.log(status);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const handleDone = async (e) => {

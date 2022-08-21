@@ -58,9 +58,7 @@ export default function MyInvitations({ data }) {
       >
         <div className="p-4 md:px-12 lg:px-24">
           <TitlePage page="My Invitations" />
-          <div className="py-4 md:py-6 font-Poppins grid justify-center">
-            no invitation yet
-          </div>
+          <div className="py-4 md:py-6 font-Poppins grid justify-center"></div>
         </div>
       </Layout>
     );
