@@ -49,12 +49,12 @@ export default function EditProfile({ data, token }) {
   const [email, setEmail] = useState(data.email);
   const [password, setPassword] = useState("");
   const [objSubmit, setObjSubmit] = useState({});
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    // setLoading(true);
+    setLoading(true);
     e.preventDefault();
 
     const formData = new FormData();
@@ -82,8 +82,8 @@ export default function EditProfile({ data, token }) {
         alert(message);
         setObjSubmit({});
       })
-      .catch((error) => alert(error.toString()));
-    // .finally(() => setLoading(false));
+      .catch((error) => alert(error.toString()))
+      .finally(() => setLoading(false));
   };
 
   const handleChange = (value, key) => {
@@ -197,7 +197,7 @@ export default function EditProfile({ data, token }) {
           <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
             <button
               className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary"
-              // loading={loading}
+              disabled={loading}
             >
               Edit
             </button>
