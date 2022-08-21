@@ -46,8 +46,9 @@ export async function getServerSideProps({ req, res }) {
 
 export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
+  console.log(dataUser.password);
   const [email, setEmail] = useState(data.email);
-  // const [password, setPassword] = useState(data.password);
+  const [password, setPassword] = useState("");
   const [objSubmit, setObjSubmit] = useState({});
   // const [loading, setLoading] = useState(false);
 
@@ -59,10 +60,10 @@ export default function EditProfile({ data, token }) {
 
     const formData = new FormData();
     formData.append("email", email);
+    formData.append("password", password);
     for (const key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
-    // formData.append(password, password);
 
     var requestOptions = {
       method: "PUT",
@@ -183,13 +184,13 @@ export default function EditProfile({ data, token }) {
                       handleChange(e.target.value, "phonenumber")
                     }
                   />
-                  {/* <CustomInput
+                  <CustomInput
                     id="inputPassword"
                     type="password"
                     placeholder="Password"
                     value={dataUser.password}
                     onChange={(e) => setPassword(e.target.value)}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
