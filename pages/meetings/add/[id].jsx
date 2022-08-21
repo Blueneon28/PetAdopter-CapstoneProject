@@ -8,7 +8,7 @@ import { CustomInput } from "../../../components/CustomInput";
 import { SmallButton } from "../../../components/CustomButton";
 
 export async function getServerSideProps({ req, res, params }) {
-  const tokenoauth = getCookie("tokenoauth", { req, res });
+  const token = getCookie("tokenoauth", { req, res });
   const jwt = getCookie("token", { req, res });
   if (!jwt) {
     return {
@@ -22,24 +22,16 @@ export async function getServerSideProps({ req, res, params }) {
   const { id } = params;
   return {
     props: {
-      id: id,
-      jwt: jwt,
-      tokenoauth: tokenoauth,
+      id,
+      jwt,
+      token,
     },
   };
 }
 
-export default function AddMeeting({ jwt, id, tokenoauth }) {
+export default function AddMeeting({ token, jwt, id }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [token] = useState("");
-  const [adoptionid] = useState(21);
-  console.log(typeof jwt);
-  console.log(typeof token);
-  console.log(typeof adoptionid);
-  console.log(date);
-  console.log(time);
-  console.log(adoptionid);
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -49,23 +41,24 @@ export default function AddMeeting({ jwt, id, tokenoauth }) {
     e.preventDefault();
     const body = {
       token,
-      adoptionid,
-      date,
+      adoptionid: parseInt(id),
       time,
+      date,
     };
     var requestOptions = {
       method: "POST",
       headers: {
         Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     };
     fetch("https://golangprojectku.site/meetings", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
-        if (result.code === 200) {
-          router.push("/myappointments");
+        const { message, code } = result;
+        if (code === 200) {
+          router.push("/meetings/myappointments");
         }
         alert(message);
       })
@@ -103,6 +96,7 @@ export default function AddMeeting({ jwt, id, tokenoauth }) {
                     className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary text-white"
                     disabled={loading}
                     type="submit"
+                    onClick={(e) => handleSubmit(e)}
                   >
                     Add
                   </button>

@@ -49,7 +49,6 @@ export async function getServerSideProps({ req, res }) {
 
 export default function MyAppointments({ data, token }) {
   const [dataMeetings] = useState(data);
-  console.log(dataMeetings);
   if (!data) {
     return (
       <Layout
@@ -74,16 +73,18 @@ export default function MyAppointments({ data, token }) {
           <TitlePage page="My Appointments" />
           <div className="py-4 md:py-6 font-Poppins grid justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {dataMeetings.map((data) => (
+              {dataMeetings.map((meeting) => (
                 <MyAppointmentCard
-                  key={data.meetingid}
-                  meetingid={data.meetingid}
-                  adoptionid={data.adoptionid}
-                  date={data.date}
-                  time={data.time}
-                  place={data.owneraddress}
-                  petname={data.petname}
-                  seekername={data.seekername}
+                  key={meeting.meetingid}
+                  token={token}
+                  status={meeting.status}
+                  meetingid={meeting.meetingid}
+                  adoptionid={meeting.adoptionid}
+                  date={meeting.date}
+                  time={meeting.time}
+                  place={meeting.owneraddress}
+                  petname={meeting.petname}
+                  seekername={meeting.seekername}
                 />
               ))}
             </div>

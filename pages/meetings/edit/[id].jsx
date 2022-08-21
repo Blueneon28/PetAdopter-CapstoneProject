@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCookie, deleteCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 import Layout from "../../../components/Layout";
 import TitlePage from "../../../components/TitlePage";
@@ -47,25 +48,27 @@ export async function getServerSideProps({ req, res, params }) {
 }
 
 export default function EditMeeting({ data, token }) {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(data.date);
   const [time, setTime] = useState(data.time);
-  const [objSubmit, setObjSubmit] = useState({});
 
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const raw = new JSON.stringify();
-    for (const key in objSubmit) {
-      raw.append(key, objSubmit[key]);
-    }
+    const body = {
+      date,
+      time,
+    };
+
     var requestOptions = {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      body: raw,
+      body: JSON.stringify(body),
     };
 
     fetch(
@@ -74,21 +77,14 @@ export default function EditMeeting({ data, token }) {
     )
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
-        if (result.code === 200) {
-          router.push("/myappointments");
+        const { message, code } = result;
+        if (code === 200) {
+          router.push("/meetings/myappointments");
         }
         alert(message);
-        setObjSubmit({});
       })
       .catch((error) => alert(error.toString()))
       .finally(() => setLoading(false));
-  };
-
-  const handleChange = (value, key) => {
-    let temp = { ...objSubmit };
-    temp[key] = value;
-    setObjSubmit(temp);
   };
   return (
     <Layout headTitle="Meeting Invitation" headDesc="Edit Meeting Invitation">
@@ -104,20 +100,14 @@ export default function EditMeeting({ data, token }) {
                     type="date"
                     placeholder="Date"
                     value={date}
-                    onChange={(e) => {
-                      setDate(e.target.value);
-                      handleChange(e.target.value, "date");
-                    }}
+                    onChange={(e) => setDate(e.target.value)}
                   />
                   <CustomInput
                     id="inputTime"
                     type="time"
                     placeholder="Time"
                     value={time}
-                    onChange={(e) => {
-                      setTime(e.target.value);
-                      handleChange(e.target.value, "time");
-                    }}
+                    onChange={(e) => setTime(e.target.value)}
                   />
                 </div>
                 <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
