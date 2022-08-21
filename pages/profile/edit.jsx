@@ -168,13 +168,13 @@ export default function EditProfile({ data, token }) {
                     value={dataUser.username}
                     onChange={(e) => handleChange(e.target.value, "username")}
                   />
-                  {/* <CustomInput
+                  <CustomInput
                     id="inputEmail"
                     type="email"
                     placeholder="Email"
                     value={dataUser.email}
                     onChange={(e) => setEmail(e.target.value)}
-                  /> */}
+                  />
                   <CustomInput
                     id="inputPhoneNumber"
                     type="number"
