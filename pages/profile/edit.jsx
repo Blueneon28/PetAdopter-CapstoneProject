@@ -46,7 +46,6 @@ export async function getServerSideProps({ req, res }) {
 
 export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
-  console.log(dataUser.password);
   const [email, setEmail] = useState(data.email);
   const [password, setPassword] = useState("");
   const [objSubmit, setObjSubmit] = useState({});
