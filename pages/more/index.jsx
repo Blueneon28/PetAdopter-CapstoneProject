@@ -72,19 +72,18 @@ export default function MoreMenu({ data }) {
                 <Image
                   src={user.photoprofile}
                   alt={user.fullname}
-                  width={300}
-                  height={300}
-                  layout={"responsive"}
+                  width={100}
+                  height={100}
+                  fill="responsive"
                   className="rounded-full"
                 />
-                <MdOutlineAccountCircle size={70} />
                 <h1 className="mx-4 text-xl">{user.fullname}</h1>
               </div>
               <MdChevronRight size={30} />
             </a>
           </Link>
-          <div className="font-medium text-xl">
-            <div>
+          <div className="font-medium text-xl my-8">
+            <div className="md:hidden">
               <Link href="/pets/mypets">
                 <a>
                   <MdPets size={30} className="inline mr-2" /> My Pets

@@ -67,8 +67,9 @@ export default function MyPets({ data, token, jwtDecode }) {
                 key={applier.id}
                 id={applier.id}
                 adoptionid={applier.adoptionid}
-                name={applier.seekername}
-                image={applier.seekerphoto}
+                seekerid={applier.seekerid}
+                seekername={applier.seekername}
+                seekerimage={applier.seekerphoto}
                 ownername={applier.ownername}
                 petname={applier.petname}
                 status={applier.status}
