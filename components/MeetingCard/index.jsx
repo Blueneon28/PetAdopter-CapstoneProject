@@ -1,32 +1,42 @@
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-function MyAppointmentCard(
+function MyAppointmentCard({
+  token,
+  status,
   meetingid,
   adoptionid,
   date,
   time,
   place,
   petname,
-  seekername
-) {
+  seekername,
+}) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleDone = async (e) => {
     setLoading(true);
     e.preventDefault();
 
-    const raw = JSON.stringify({ status: "Adopted" });
+    const body = { status: "Adopted" };
 
     var requestOptions = {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      body: raw,
+      body: JSON.stringify(body),
     };
 
     fetch(`https://golangprojectku.site/appliers/${adoptionid}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
+        const { message, code } = result;
+        if (code === 200) {
+          router.reload();
+        }
         alert(message);
       })
       .catch((error) => {
@@ -49,7 +59,10 @@ function MyAppointmentCard(
     fetch(`https://golangprojectku.site/meetings/${meetingid}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
+        const { message, code } = result;
+        if (code === 200) {
+          router.reload();
+        }
         alert(message);
       })
       .catch((error) => {
@@ -76,6 +89,10 @@ function MyAppointmentCard(
               <td className="text-primary">{place}</td>
             </tr>
             <tr>
+              <td className="font-medium">Status</td>
+              <td className="text-primary">{status}</td>
+            </tr>
+            <tr>
               <td className="font-medium">Pet name</td>
               <td className="text-primary">{petname}</td>
             </tr>
@@ -87,19 +104,33 @@ function MyAppointmentCard(
         </table>
         <div className="space-x-1 dark:text-black">
           <Link href={`/meetings/edit/${meetingid}`}>
-            <button className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary">
+            <button
+              className={
+                status === "Adopted"
+                  ? "hidden"
+                  : "w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary"
+              }
+            >
               Edit
             </button>
           </Link>
           <button
             onClick={(e) => handleDone(e)}
-            className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary"
+            className={
+              status === "Adopted"
+                ? "hidden"
+                : "w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-primary"
+            }
           >
             Done
           </button>
           <button
             onClick={(e) => handleCancel(e)}
-            className="w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500"
+            className={
+              status === "Adopted"
+                ? "hidden"
+                : "w-16 md:w-20 text-md md:text-lg rounded-lg font-Poppins bg-red-500"
+            }
           >
             Cancel
           </button>
@@ -109,7 +140,7 @@ function MyAppointmentCard(
   );
 }
 
-function MyInvitationCard(date, time, place, petname, ownername) {
+function MyInvitationCard({ date, time, status, place, petname, ownername }) {
   return (
     <div className="grid grid-cols-1 gap-5 ">
       <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
@@ -126,6 +157,10 @@ function MyInvitationCard(date, time, place, petname, ownername) {
             <tr>
               <td className="font-medium">Place</td>
               <td className="text-primary">{place}</td>
+            </tr>
+            <tr>
+              <td className="font-medium">Status</td>
+              <td className="text-primary">{status}</td>
             </tr>
             <tr>
               <td className="font-medium">Pet name</td>

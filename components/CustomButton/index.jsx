@@ -5,9 +5,7 @@ function SmallButton({ id, label, onClick, loading, href, className }) {
   return (
     <Link href={`${href}`}>
       <button
-        className={`${className} text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins ${
-          loading && "cursor-not-allowed"
-        }`}
+        className={`${className} text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins text-white`}
         id={id}
         onClick={onClick}
         disabled={loading}
@@ -21,9 +19,7 @@ function SmallButton({ id, label, onClick, loading, href, className }) {
 function LargeButton({ id, label, onClick, loading, className }) {
   return (
     <button
-      className={`${className} w-full md:w-full lg:w-full font-Poppins text-lg md:text-2xl lg:text-2xl md:btn-md lg:btn-md py-1 rounded-lg  ${
-        loading && "cursor-not-allowed"
-      }`}
+      className={`${className} w-full md:w-full lg:w-full font-Poppins text-lg md:text-2xl lg:text-2xl md:btn-md lg:btn-md py-1 rounded-lg`}
       id={id}
       onClick={onClick}
       disabled={loading}

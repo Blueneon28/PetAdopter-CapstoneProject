@@ -11,16 +11,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    if (username && password) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [username, password]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -40,7 +31,9 @@ export default function Login() {
         const { code, message, data } = result;
         if (code === 200) {
           const { token } = data;
+          const { tokenoauth } = data;
           setCookie("token", token);
+          setCookie("tokenoauth", tokenoauth);
           data.role === "user" ? router.push("/") : router.push("/admin");
         }
         alert(message);
@@ -103,7 +96,7 @@ export default function Login() {
                   id="loginButton"
                   type="submit"
                   label="Login"
-                  loading={loading || disabled}
+                  loading={loading}
                   className="bg-primary font-semibold text-white"
                 />
               </div>

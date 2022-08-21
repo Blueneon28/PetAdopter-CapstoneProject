@@ -46,24 +46,20 @@ export async function getServerSideProps({ req, res }) {
 
 export default function EditProfile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
-  const [password, setPassword] = useState(data.password);
+  const [email, setEmail] = useState(data.email);
+  const [password, setPassword] = useState("");
   const [objSubmit, setObjSubmit] = useState({});
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-  const router = useRouter();
 
-  useEffect(() => {
-    if (password) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [password]);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+
     const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
     for (const key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
@@ -176,7 +172,7 @@ export default function EditProfile({ data, token }) {
                     type="email"
                     placeholder="Email"
                     value={dataUser.email}
-                    onChange={(e) => handleChange(e.target.value, "email")}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <CustomInput
                     id="inputPhoneNumber"
@@ -192,22 +188,19 @@ export default function EditProfile({ data, token }) {
                     type="password"
                     placeholder="Password"
                     value={dataUser.password}
-                    onChange={(e) => {
-                      setPassword(e.target.value),
-                        handleChange(e.target.value, "password");
-                    }}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
             </div>
           </div>
           <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-            <SmallButton
-              onClick={(e) => handleSubmit(e)}
-              label="Done"
-              loading={loading || disabled}
-              className="bg-primary text-white font-semibold"
-            />
+            <button
+              className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary"
+              disabled={loading}
+            >
+              Edit
+            </button>
             <SmallButton
               href="/profile"
               label="cancel"

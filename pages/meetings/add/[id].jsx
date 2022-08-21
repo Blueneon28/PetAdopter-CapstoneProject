@@ -8,8 +8,9 @@ import { CustomInput } from "../../../components/CustomInput";
 import { SmallButton } from "../../../components/CustomButton";
 
 export async function getServerSideProps({ req, res, params }) {
-  const token = getCookie("token", { req, res });
-  if (!token) {
+  const token = getCookie("tokenoauth", { req, res });
+  const jwt = getCookie("token", { req, res });
+  if (!jwt) {
     return {
       redirect: {
         permanent: false,
@@ -21,49 +22,43 @@ export async function getServerSideProps({ req, res, params }) {
   const { id } = params;
   return {
     props: {
-      adoptionid: id,
+      id,
+      jwt,
+      token,
     },
   };
 }
 
-export default function AddMeeting({ token, adoptionid }) {
+export default function AddMeeting({ token, jwt, id }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-
-  useEffect(() => {
-    if (date && time) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [date, time]);
 
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const body = {
       token,
-      adoptionid,
-      date,
+      adoptionid: parseInt(id),
       time,
+      date,
     };
     var requestOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     };
     fetch("https://golangprojectku.site/meetings", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        const { message } = result;
-        if (result.code === 200) {
-          router.push("/myappointments");
+        const { message, code } = result;
+        if (code === 200) {
+          router.push("/meetings/myappointments");
         }
         alert(message);
       })
@@ -85,27 +80,30 @@ export default function AddMeeting({ token, adoptionid }) {
                     id="inputDate"
                     type="date"
                     placeholder="Date"
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
                   <CustomInput
                     id="inputTime"
                     type="time"
                     placeholder="Time"
+                    value={time}
                     onChange={(e) => setTime(e.target.value)}
                   />
                 </div>
                 <div className="pt-20 space-x-2 flex flex-cols-2 justify-center">
-                  <SmallButton
-                    onClick={(e) => handleSubmit(e)}
-                    label="Add"
-                    loading={loading || disabled}
+                  <button
+                    className="text-md md:text-2xl py-1 md:py-2 w-24 md:w-32 rounded-lg font-Poppins bg-primary text-white"
+                    disabled={loading}
                     type="submit"
-                    className="bg-primary text-white font-semibold"
-                  />
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Add
+                  </button>
                   <SmallButton
                     href="/appliers"
                     label="cancel"
-                    className="text-black bg-accent"
+                    className="bg-accent"
                   />
                 </div>
               </form>
