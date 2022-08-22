@@ -73,32 +73,32 @@ function MyAppointmentCard({
 
   return (
     <div className="grid grid-cols-1 gap-5 ">
-      <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
+      <div className="w-72 text-sm md:text-lg border-4 border-secondary p-2">
         <table>
           <thead>
             <tr>
               <td className="font-medium">Date</td>
-              <td className="text-primary">{date}</td>
+              <td>{date}</td>
             </tr>
             <tr>
               <td className="font-medium">Time</td>
-              <td className="text-primary">{time}</td>
+              <td>{time}</td>
             </tr>
             <tr>
               <td className="font-medium">Place</td>
-              <td className="text-primary">{place}</td>
+              <td>{place}</td>
             </tr>
             <tr>
               <td className="font-medium">Status</td>
-              <td className="text-primary">{status}</td>
+              <td className="text-primary italic">{status}</td>
             </tr>
             <tr>
               <td className="font-medium">Pet name</td>
-              <td className="text-primary">{petname}</td>
+              <td>{petname}</td>
             </tr>
             <tr>
               <td className="font-medium">Seeker name</td>
-              <td className="text-primary">{seekername}</td>
+              <td>{seekername}</td>
             </tr>
           </thead>
         </table>
@@ -143,32 +143,32 @@ function MyAppointmentCard({
 function MyInvitationCard({ date, time, status, place, petname, ownername }) {
   return (
     <div className="grid grid-cols-1 gap-5 ">
-      <div className="w-72 text-sm md:text-lg border-l-8 border-primary pl-3">
+      <div className="w-72 text-sm md:text-lg border-4 border-secondary p-2">
         <table>
           <thead>
             <tr>
               <td className="font-medium">Date</td>
-              <td className="text-primary">{date}</td>
+              <td>{date}</td>
             </tr>
             <tr>
               <td className="font-medium">Time</td>
-              <td className="text-primary">{time}</td>
+              <td>{time}</td>
             </tr>
             <tr>
               <td className="font-medium">Place</td>
-              <td className="text-primary">{place}</td>
+              <td>{place}</td>
             </tr>
             <tr>
               <td className="font-medium">Status</td>
-              <td className="text-primary">{status}</td>
+              <td className="text-primary italic">{status}</td>
             </tr>
             <tr>
               <td className="font-medium">Pet name</td>
-              <td className="text-primary">{petname}</td>
+              <td>{petname}</td>
             </tr>
             <tr>
               <td className="font-medium">Owner name</td>
-              <td className="text-primary">{ownername}</td>
+              <td>{ownername}</td>
             </tr>
           </thead>
         </table>

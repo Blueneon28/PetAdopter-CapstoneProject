@@ -34,7 +34,7 @@ export default function TitlePage({ page = "Title" }) {
         <h1 className="font-bold text-xl md:text-2xl lg:text-3xl">{page}</h1>
       </div>
       <div className={`${page === "Discover" ? "block" : "hidden"}`}>
-        <Link href="/meeting">
+        <Link href="/meetings/myinvitations">
           <a>
             <div className="md:hidden">
               <MdDehaze size={25} />

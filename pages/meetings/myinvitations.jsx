@@ -79,6 +79,7 @@ export default function MyInvitations({ data }) {
                   date={data.date}
                   time={data.time}
                   place={data.owneraddress}
+                  status={data.status}
                   petname={data.petname}
                   ownername={data.ownername}
                 />
