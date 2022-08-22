@@ -91,7 +91,7 @@ export default function MoreMenu({ data }) {
               </Link>
             </div>
             <div className="my-3">
-              <Link href="/meetings">
+              <Link href="/meetings/myappointments">
                 <a>
                   <MdEvent size={30} className="inline mr-2" /> My Meeting
                   Appointment
