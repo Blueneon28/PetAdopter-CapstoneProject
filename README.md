@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# ![Logo](https://storage.googleapis.com/be10-petdopter/petdopter/logo/text-logo-petdopter.png)
 
-First, run the development server:
+Petdopter Application created with NextJS, TailwindCSS, and DaisyUI
+
+![Logo](https://storage.googleapis.com/be10-petdopter/petdopter/logo/logo-petdopter.png)
+
+
+## 📜 Table of contents
+
+
+* [General info](#ℹ️-general-info)
+* [Technologies](#%EF%B8%8F-technologies)
+* [Prototype](#-prototype)
+* [Demo](#-demo)
+* [Packages](#-packages)
+* [Installation](#%EF%B8%8F-installation)
+* [Authors](#-authors)
+## ℹ️ General info
+
+Nowadays, human concern for stray pets is increasing, so there is a need for a platform that accommodates the adoption process.
+
+## 🛠️ Technologies
+
+- [NodeJS](https://nodejs.org/en/)
+- [NextJS (React Framework)](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/docs/installation)
+- [DaisyUI](https://daisyui.com/docs/install/)
+- [Vercel](https://vercel.com/)
+## 📱 Prototype
+
+- [Figma Prototype](https://www.figma.com/proto/xZ4zMaF5CuYk2bFHfobnZe/Petdopter-UI%2FUX-Design?page-id=0%3A1&node-id=18%3A2&viewport=292%2C209%2C0.11&scaling=scale-down&starting-point-node-id=18%3A2&show-proto-sidebar=1)
+## 🌐 Demo
+
+- [Petdopter App](https://pet-adopter-capstone-project.vercel.app)
+
+
+## 📦 Packages
+
+- [![react-icons](https://img.shields.io/npm/v/react-icons/latest?label=react-icons&logo=npm&style=for-the-badge)](http://react-icons.github.io/react-icons)
+- [![next-pwa](https://img.shields.io/npm/v/next-pwa/latest?label=next-pwa&logo=npm&style=for-the-badge)](https://www.npmjs.com/package/next-pwa/v/5.5.4)
+- [![next-cookies](https://img.shields.io/npm/v/next-cookies/latest?label=next-cookies&logo=npm&style=for-the-badge)](https://www.npmjs.com/package/next-cookies/v/2.0.3)
+- [![jwt-decode](https://img.shields.io/npm/v/jwt-decode/latest?label=jwt-decode&logo=npm&style=for-the-badge)](https://www.npmjs.com/package/jwt-decode)
+
+## ⚙️ Installation
+
+- Clone this project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/ProjectCapstone-PetAdopter/PetAdopter-Frontend.git
 ```
+- Run project
+```bash
+  cd PetAdopter-Frontend
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  npm run dev
+  # or
+  yarn dev
+```
+## 🧑‍💻 Authors
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- [Adyatma Fulvian](https://github.com/Blueneon28)
+- [Faisol R](https://github.com/faisolrr)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
