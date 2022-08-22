@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { getCookie, deleteCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 import Layout from "../../components/Layout";
 import TitlePage from "../../components/TitlePage";
@@ -44,7 +45,9 @@ export async function getServerSideProps({ req, res }) {
 
 export default function Profile({ data, token }) {
   const [dataUser, setDataUser] = useState(data);
+
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleDelete = async (e) => {
     setLoading(true);
@@ -61,10 +64,11 @@ export default function Profile({ data, token }) {
       .then((response) => response.json())
       .then((result) => {
         const { message, code } = result;
-        alert(message);
         if (code === 200) {
-          location.reload();
+          deleteCookie("token");
+          router.push("/auth/login");
         }
+        alert(message);
       })
       .catch((error) => {
         alert(error, toString());
